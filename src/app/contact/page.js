@@ -19,12 +19,16 @@ export default function Contact() {
       <header className="w-full py-6 px-4 md:px-8 bg-white/90 backdrop-blur-md fixed top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/images/GreenLogo.svg" alt="Clubhouse Logo" width={200} height={200} />
-
+            <Image
+              src="/images/GreenLogo.svg"
+              alt="Clubhouse Logo"
+              width={200}
+              height={200}
+            />
           </Link>
-          
-          <button 
-            onClick={() => router.push('/')}
+
+          <button
+            onClick={() => router.push("/")}
             className="text-theme hover:text-theme-dark transition-colors"
           >
             Back to Home
@@ -45,12 +49,12 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8">
-              Have questions about membership or want to schedule a tour? 
-              We'd love to hear from you.
+              Have questions about membership or want to schedule a tour?
+              We&apos;d love to hear from you.
             </p>
           </motion.div>
         </div>
-        
+
         {/* Decorative elements */}
         <div className="absolute left-0 top-1/4 w-32 h-32 bg-theme/10 rounded-full blur-3xl -z-10" />
         <div className="absolute right-0 bottom-1/4 w-40 h-40 bg-theme/10 rounded-full blur-3xl -z-10" />
@@ -68,7 +72,7 @@ export default function Contact() {
             >
               <ContactForm />
             </motion.div>
-            
+
             {/* Contact information */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -80,8 +84,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      
-    
 
       {/* Footer */}
       <Footer />
