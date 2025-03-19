@@ -4,8 +4,14 @@ const nextConfig = {
     domains: ["encrypted-tbn0.gstatic.com", "upload.wikimedia.org"],
     unoptimized: true,
   },
-  // Ensure static exports work correctly
+  // Use standalone output for better Vercel deployment
   output: "standalone",
+  // Enable both App Router and Pages Router
+  experimental: {
+    appDir: true,
+  },
+  // Ensure proper page extensions are processed
+  pageExtensions: ["js", "jsx", "ts", "tsx"],
 };
 
 export default nextConfig;
