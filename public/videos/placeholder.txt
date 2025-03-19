@@ -1,0 +1,11 @@
+To complete the hero section, please add a video file named 'clubhouse-hero.mp4' in this directory.
+
+For best results, use a professionally shot video of a modern luxury business space, showing professionals working, networking, and collaborating in elegant surroundings.
+
+The video should be:
+- Landscape format (16:9 aspect ratio)
+- At least 1080p quality
+- 10-20 seconds in length
+- Loopable (smooth transition between end and beginning)
+- Subtle motion (not too distracting)
+- No audio required (it will be muted) 

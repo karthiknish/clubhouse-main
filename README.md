@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# The Clubhouse Website
+
+A modern, responsive website for The Clubhouse - London's premier business club and workspace.
+
+## Features
+
+- Responsive design for all device sizes
+- Modern UI built with Next.js, Tailwind CSS, Shadcn UI, and Framer Motion
+- Animated hero section with video background
+- Interactive components with smooth animations
+- Search engine optimized
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18.x or higher
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd clubhouse-main
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Add media assets:
+   - Add video file `clubhouse-hero.mp4` to the `/public/videos/` directory
+   - Add image files to the `/public/images/` directory:
+     - `workspace.jpg` - Main workspace image
+     - `location-1.jpg` - Mayfair location image
+     - `location-2.jpg` - Bank location image
+   
+   See placeholder text files in the respective directories for detailed specifications.
+
+4. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/src/app` - Next.js app router pages and layouts
+- `/src/components` - React components
+- `/src/components/ui` - Shadcn UI components
+- `/public` - Static assets like images and videos
 
-## Learn More
+## Customization
 
-To learn more about Next.js, take a look at the following resources:
+### Adding New Pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create new pages in the `/src/app` directory. For example:
+- `/src/app/about/page.js` for an About page
+- `/src/app/contact/page.js` for a Contact page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Modifying the Theme
 
-## Deploy on Vercel
+Tailwind CSS styles can be adjusted in:
+- `tailwind.config.js` - Main theme configuration
+- `src/app/globals.css` - Global CSS styles
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This website can be deployed with any platform that supports Next.js applications, such as Vercel, Netlify, or AWS Amplify.
+
+For optimal performance, consider using a CDN to serve the video and image assets.
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org/) - React framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Shadcn UI](https://ui.shadcn.com/) - Component library
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
+
+## License
+
+This project is proprietary and confidential.

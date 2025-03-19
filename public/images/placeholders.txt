@@ -1,0 +1,16 @@
+To complete the website, please add the following images to this directory:
+
+1. workspace.jpg - A high-quality image of a modern, elegant workspace with comfortable seating, good lighting, and professional atmosphere.
+
+2. location-1.jpg - An image of the Mayfair location, either exterior building shot or interior workspace.
+
+3. location-2.jpg - An image of the Bank location, either exterior building shot or interior workspace.
+
+Recommended specifications for all images:
+- High resolution (at least 1920x1080 pixels)
+- Professional quality
+- Well-lit
+- Landscape orientation
+- Showing premium, luxury business environments
+
+These images will be used throughout the site to showcase The Clubhouse's premium facilities and locations. 
