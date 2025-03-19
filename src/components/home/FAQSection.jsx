@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 
 const FAQSection = () => {
+  // Using null as initial state to avoid hydration mismatch
+  const [mounted, setMounted] = useState(false);
+  
+  // Only run client-side effects after hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
   const faqs = [
     {
       question: "What is Clubhouse?",
@@ -39,10 +47,13 @@ const FAQSection = () => {
     }
   ];
 
+  // Only initialize client-side state after mounting
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
+    if (mounted) {
+      setActiveIndex(activeIndex === index ? null : index);
+    }
   };
 
   return (
@@ -86,19 +97,20 @@ const FAQSection = () => {
             >
               <button
                 className={`w-full text-left p-6 rounded-xl flex justify-between items-center ${
-                  activeIndex === index
+                  mounted && activeIndex === index
                     ? "bg-theme text-white shadow-lg"
                     : "bg-white shadow-md hover:bg-gray-50"
                 }`}
                 onClick={() => toggleFAQ(index)}
+                suppressHydrationWarning
               >
                 <h3 className="text-xl font-semibold font-display">{faq.question}</h3>
-                <span className="text-2xl transition-transform duration-300 transform">
-                  {activeIndex === index ? "−" : "+"}
+                <span className="text-2xl transition-transform duration-300 transform" suppressHydrationWarning>
+                  {mounted && activeIndex === index ? "−" : "+"}
                 </span>
               </button>
               <AnimatePresence>
-                {activeIndex === index && (
+                {mounted && activeIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}

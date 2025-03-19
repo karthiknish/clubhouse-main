@@ -2,14 +2,21 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import TiltCard from "@/components/TiltCard";
 import MagneticButton from "@/components/MagneticButton";
 
 export default function AboutSection() {
+  // Initialize with null to avoid hydration mismatch
   const [currentImage, setCurrentImage] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Only run client-side effects after hydration
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   const images = [
     "/images/about.jpeg",
     "/images/about2.jpeg",
@@ -17,11 +24,15 @@ export default function AboutSection() {
   ];
 
   const nextImage = () => {
-    setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    if (isMounted) {
+      setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    }
   };
 
   const prevImage = () => {
-    setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    if (isMounted) {
+      setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    }
   };
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -189,11 +200,12 @@ export default function AboutSection() {
                         key={index}
                         className="absolute inset-0"
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: index === currentImage ? 1 : 0 }}
+                        animate={{ opacity: isMounted && index === currentImage ? 1 : 0 }}
                         transition={{ duration: 0.5 }}
                         style={{
-                          display: index === currentImage ? "block" : "none",
+                          display: isMounted && index === currentImage ? "block" : "none",
                         }}
+                        suppressHydrationWarning
                       >
                         <Image
                           src={src}
@@ -265,8 +277,9 @@ export default function AboutSection() {
                         <motion.button
                           key={index}
                           className={`w-2 h-2 rounded-full ${
-                            index === currentImage ? "bg-white" : "bg-white/40"
+                            isMounted && index === currentImage ? "bg-white" : "bg-white/40"
                           }`}
+                          suppressHydrationWarning
                           whileHover={{ scale: 1.5 }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => setCurrentImage(index)}
