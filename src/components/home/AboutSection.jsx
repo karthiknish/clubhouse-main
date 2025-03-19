@@ -280,7 +280,7 @@ export default function AboutSection() {
                           fill
                           priority={index === 0}
                           className="object-cover rounded-2xl"
-                          priority
+              
                           unoptimized
                         />
                       </motion.div>
