@@ -1,13 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import MagneticButton from "@/components/MagneticButton";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import Image from "next/image";
+import { isSafari, optimizedTransform } from "@/lib/motion";
 
 export default function LocationsSection() {
-  // City data with images and descriptions
+  const [mounted, setMounted] = useState(false);
+  const [isLowPerformance, setIsLowPerformance] = useState(true); // Default to low performance for SSR
+
+  useEffect(() => {
+    setMounted(true);
+    // Detect if this is a low-performance device (Safari or mobile/tablet)
+    setIsLowPerformance(
+      isSafari() || (typeof window !== "undefined" && window.innerWidth < 1200)
+    );
+  }, []);
+
+  // City data with images and descriptions - using smaller images for better performance
   const cities = [
     {
       name: "London",
@@ -39,76 +52,67 @@ export default function LocationsSection() {
       image:
         "https://directorsbox.co.uk/wp-content/uploads/2025/02/pexels-howard-senton-2148272793-30389574-scaled.jpg",
     },
-    {
-      name: "Glasgow",
-      image:
-        "https://www.premiersuiteseurope.com/wp-content/uploads/2023/05/Glasgow.jpg",
-    },
-    {
-      name: "Newcastle",
-      image:
-        "https://directorsbox.co.uk/wp-content/uploads/2025/02/pexels-anthony-holmes-1500340-2893285-scaled.jpg",
-    },
-    {
-      name: "Liverpool",
-      image:
-        "https://directorsbox.co.uk/wp-content/uploads/2025/02/liverpool-merseyside-united-kingdom-2023-11-27-05-25-47-utc-min-scaled.jpg",
-    },
   ];
 
   return (
-    <section
-      id="locations"
-      className="w-full py-32 relative overflow-hidden bg-gray-100"
-    >
-      {/* Background decorative elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-green-100 rounded-full opacity-30 blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-100 rounded-full opacity-40 blur-3xl translate-x-1/3 translate-y-1/3"></div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
-        <div className="text-center mb-20">
+    <section className="w-full py-20 md:py-32 relative overflow-hidden bg-theme/5">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16 md:mb-20">
           <AnimatedText
             text="Our Locations"
-            className="text-5xl md:text-6xl font-bold font-display text-theme mb-6"
-            once
+            className="text-4xl md:text-5xl font-bold font-display text-theme mb-4 md:mb-6"
+            type="words"
           />
           <motion.p
-            className="text-theme text-xl max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-lg md:text-xl text-theme/90 max-w-3xl mx-auto px-4"
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
             viewport={{ once: true }}
+            style={optimizedTransform}
           >
             Establishing a network of premium workspaces across the UK&apos;s
             most influential cities, designed for innovation and collaboration.
           </motion.p>
           <AnimatedDivider
-            color="bg-green-300"
-            className="mt-8 max-w-md mx-auto"
+            color="bg-theme"
+            className="mt-6 md:mt-8 mb-10 md:mb-16"
           />
         </div>
 
-        {/* City grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        {/* Location cards grid with optimized animations */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {cities.map((city, index) => (
             <motion.div
-              key={city.name}
-              className="rounded-xl bg-white shadow-lg border border-green-100 hover:shadow-xl transition-all duration-300 overflow-hidden group"
-              initial={{ opacity: 0, y: 30 }}
+              key={index}
+              className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{
+                delay: isLowPerformance ? 0.1 : index * 0.1,
+                duration: 0.4,
+              }}
               viewport={{ once: true }}
+              style={optimizedTransform}
             >
               <div className="h-48 relative overflow-hidden">
                 <div className="absolute inset-0 bg-green-900/20 group-hover:bg-green-900/10 transition-colors duration-300 z-10"></div>
-                <Image
-                  src={city.image}
-                  alt={`${city.name} office`}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  unoptimized
-                />
+                {/* Use Next.js Image with proper settings */}
+                <div className="relative w-full h-full">
+                  <Image
+                    src={city.image}
+                    alt={`${city.name} office`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className={`object-cover ${
+                      isLowPerformance
+                        ? ""
+                        : "group-hover:scale-105 transition-transform duration-700"
+                    }`}
+                    unoptimized
+                    loading="lazy"
+                  />
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-theme mb-2 font-display">
@@ -119,30 +123,28 @@ export default function LocationsSection() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA - simplified animation */}
         <motion.div
-          className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-10 max-w-4xl mx-auto shadow-xl border border-green-100"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto mt-16 md:mt-20 shadow-md"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
           viewport={{ once: true }}
+          style={optimizedTransform}
         >
-          <h4 className="text-2xl font-bold text-theme mb-4 font-display">
+          <h4 className="text-xl md:text-2xl font-bold text-theme mb-4 font-display">
             Ready to join our community?
           </h4>
-          <p className="text-theme text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-theme text-base md:text-lg mb-6 max-w-2xl mx-auto">
             Access all our premium locations with a single membership. Work from
             anywhere in our nationwide network.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <MagneticButton
-              variant="outline"
-              size="lg"
-              className="border-theme text-theme hover:bg-theme/10 font-display px-8"
-            >
-              Contact Us
-            </MagneticButton>
-          </div>
+          <MagneticButton
+            className="bg-theme text-white hover:bg-theme/90 font-display"
+            intensity={isLowPerformance ? 10 : 25}
+          >
+            View All Locations
+          </MagneticButton>
         </motion.div>
       </div>
     </section>
