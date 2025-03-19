@@ -27,18 +27,17 @@ export default function AboutSection() {
     setIsLowPerformance(isSafariOrMobile);
 
     // Apply hardware acceleration to all animated elements
-    document.querySelectorAll(".safari-optimize").forEach((el) => {
-      el.style.webkitTransform = "translateZ(0)";
-      el.style.willChange = "transform, opacity";
-    });
-
-    // Auto-rotate images (only if not low performance)
-    let imageInterval;
-    if (!isSafariOrMobile) {
-      imageInterval = setInterval(() => {
-        setCurrentImage(prev => (prev === images.length - 1 ? 0 : prev + 1));
-      }, 5000); // Change image every 5 seconds
+    if (typeof document !== "undefined") {
+      document.querySelectorAll(".safari-optimize").forEach((el) => {
+        el.style.webkitTransform = "translateZ(0)";
+        el.style.willChange = "transform, opacity";
+      });
     }
+
+    // Auto-rotate images (always enable rotation regardless of device)
+    const imageInterval = setInterval(() => {
+      setCurrentImage(prev => (prev === images.length - 1 ? 0 : prev + 1));
+    }, 5000); // Change image every 5 seconds
 
     // Cleanup function
     return () => {
@@ -265,12 +264,11 @@ export default function AboutSection() {
                         animate={{
                           opacity: isMounted && index === currentImage ? 1 : 0,
                         }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
                         style={{
-                          display:
-                            isMounted && index === currentImage
-                              ? "block"
-                              : "none",
+                          // Always keep all images in the DOM, just hide them
+                          // This prevents issues with images not loading
+                          opacity: isMounted && index === currentImage ? 1 : 0,
                           willChange: "transform, opacity",
                           WebkitTransform: "translateZ(0)",
                         }}
@@ -280,6 +278,7 @@ export default function AboutSection() {
                           src={src}
                           alt={`Clubhouse workspace ${index + 1}`}
                           fill
+                          priority={index === 0}
                           className="object-cover rounded-2xl"
                           priority
                           unoptimized
