@@ -199,7 +199,7 @@ const AppSection = () => {
                     <Image
                       src="/images/app-screen.png"
                       alt="Clubhouse Benefits App Screen"
-                      fill="true"
+                      fill
                       className="object-cover"
                       priority
                       unoptimized
@@ -312,12 +312,15 @@ const AppSection = () => {
                 </p>
                 <div className="flex flex-wrap gap-6">
                   <MagneticButton
-                    onClick={() =>
-                      window.open(
-                        "https://apps.apple.com/gb/app/clubhouse-benefits/id6499525596",
-                        "_blank"
-                      )
-                    }
+                    onClick={() => {
+                      // Use typeof to ensure this only runs on client
+                      if (typeof window !== "undefined") {
+                        window.open(
+                          "https://apps.apple.com/gb/app/clubhouse-benefits/id6499525596",
+                          "_blank"
+                        );
+                      }
+                    }}
                     className="bg-black text-white hover:bg-black/90 font-display flex items-center space-x-2"
                   >
                     <img
@@ -330,12 +333,15 @@ const AppSection = () => {
                   </MagneticButton>
 
                   <MagneticButton
-                    onClick={() =>
-                      window.open(
-                        "https://play.google.com/store/apps/details?id=com.mydatalife.clubhousebenefits&gl=GB",
-                        "_blank"
-                      )
-                    }
+                    onClick={() => {
+                      // Use typeof to ensure this only runs on client
+                      if (typeof window !== "undefined") {
+                        window.open(
+                          "https://play.google.com/store/apps/details?id=com.mydatalife.clubhousebenefits&gl=GB",
+                          "_blank"
+                        );
+                      }
+                    }}
                     className="bg-black text-white hover:bg-black/90 font-display flex items-center"
                   >
                     <img

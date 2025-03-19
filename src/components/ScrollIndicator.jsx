@@ -2,13 +2,22 @@
 
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function ScrollIndicator() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
@@ -27,9 +36,13 @@ export default function ScrollIndicator() {
     >
       <motion.div
         className="flex flex-col items-center"
-        animate={{
-          y: [0, 5, 0],
-        }}
+        animate={
+          mounted
+            ? {
+                y: [0, 5, 0],
+              }
+            : { y: 0 }
+        }
         transition={{
           duration: 1.5,
           repeat: Infinity,

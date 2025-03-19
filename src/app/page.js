@@ -19,6 +19,7 @@ import {
 } from "@/components/home";
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState("default");
 
@@ -28,12 +29,16 @@ export default function Home() {
   const headerY = useTransform(scrollYProgress, [0, 0.1], [0, -100]);
 
   useEffect(() => {
+    setMounted(true);
+
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    if (typeof window !== "undefined") {
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
+    }
   }, []);
 
   const enterButton = () => setCursorVariant("button");
@@ -42,11 +47,13 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between relative overflow-hidden">
-      {/* Custom cursor */}
-      <CustomCursor
-        mousePosition={mousePosition}
-        cursorVariant={cursorVariant}
-      />
+      {/* Custom cursor - only rendered on client side */}
+      {mounted && (
+        <CustomCursor
+          mousePosition={mousePosition}
+          cursorVariant={cursorVariant}
+        />
+      )}
 
       {/* Hero Section */}
       <section id="hero" className="w-full h-screen">
@@ -87,7 +94,7 @@ export default function Home() {
       <section id="faq" className="w-full">
         <FAQSection />
       </section>
-      
+
       {/* CTA Section */}
       <section id="cta" className="w-full">
         <CTASection />

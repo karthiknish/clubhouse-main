@@ -8,27 +8,50 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 
 export default function Navbar() {
+  const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (typeof window !== "undefined" && window.scrollY > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Return a simplified navbar initially to prevent hydration errors
+  if (!mounted) {
+    return (
+      <header className="fixed top-0 left-0 w-full z-50 py-5 bg-transparent">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center">
+            <Link href="/" className="font-bold text-2xl">
+              THE CLUBHOUSE
+            </Link>
+            <div className="md:hidden">
+              <Menu className="text-2xl" />
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header

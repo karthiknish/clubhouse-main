@@ -4,47 +4,53 @@ import { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
+  const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
-  
+
   // Mouse position with spring physics for smooth movement
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
+
   const springConfig = { damping: 25, stiffness: 300 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    setMounted(true);
+
     const handleMouseMove = (e) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
       setIsVisible(true);
-      
+
       // Check if cursor is over a clickable element
       const target = e.target;
-      const isClickable = 
-        target.tagName.toLowerCase() === 'button' || 
-        target.tagName.toLowerCase() === 'a' ||
-        target.closest('button') || 
-        target.closest('a') ||
-        window.getComputedStyle(target).cursor === 'pointer';
-      
+      const isClickable =
+        target.tagName.toLowerCase() === "button" ||
+        target.tagName.toLowerCase() === "a" ||
+        target.closest("button") ||
+        target.closest("a") ||
+        window.getComputedStyle(target).cursor === "pointer";
+
       setIsPointer(isClickable);
     };
-    
+
     const handleMouseLeave = () => {
       setIsVisible(false);
     };
-    
+
     window.addEventListener("mousemove", handleMouseMove);
     document.body.addEventListener("mouseleave", handleMouseLeave);
-    
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       document.body.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [mouseX, mouseY]);
+
+  // Only render cursor on client side to avoid hydration mismatch
+  if (!mounted) return null;
 
   return (
     <>
