@@ -7,6 +7,7 @@ import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import TiltCard from "@/components/TiltCard";
 import MagneticButton from "@/components/MagneticButton";
+import { isSafari, optimizedTransform } from "@/lib/motion";
 
 export default function AboutSection() {
   // Initialize with null to avoid hydration mismatch
