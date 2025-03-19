@@ -16,6 +16,12 @@ export default function AboutSection() {
   // Only run client-side effects after hydration
   useEffect(() => {
     setIsMounted(true);
+    
+    // Safari-specific optimizations
+    document.querySelectorAll('.safari-optimize').forEach(el => {
+      el.style.webkitTransform = 'translateZ(0)';
+      el.style.willChange = 'transform, opacity';
+    });
   }, []);
   const images = [
     "/images/about.jpeg",
@@ -175,9 +181,9 @@ export default function AboutSection() {
           {/* Right image column with 3D tilt effect */}
           <motion.div
             className="lg:col-span-7 relative"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true, margin: "-100px" }}
           >
             <TiltCard className="rounded-2xl overflow-hidden" intensity={10}>
@@ -188,22 +194,25 @@ export default function AboutSection() {
 
                 {/* Image Slider */}
                 <motion.div
-                  className="absolute inset-0 w-full h-full"
+                  className="absolute inset-0 w-full h-full safari-optimize"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <div className="relative w-full h-full">
                     {/* Image slider */}
                     {images.map((src, index) => (
                       <motion.div
                         key={index}
-                        className="absolute inset-0"
+                        className="absolute inset-0 safari-optimize"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: isMounted && index === currentImage ? 1 : 0 }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         style={{
                           display: isMounted && index === currentImage ? "block" : "none",
+                          willChange: "transform, opacity",
+                          WebkitTransform: "translateZ(0)"
                         }}
                         suppressHydrationWarning
                       >
@@ -221,7 +230,7 @@ export default function AboutSection() {
                     {/* Slider navigation arrows */}
                     <div className="absolute inset-0 flex items-center justify-between px-4 z-20">
                       <motion.button
-                        className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/30 shadow-lg"
+                        className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/30 shadow-lg safari-optimize"
                         whileHover={{
                           scale: 1.1,
                           backgroundColor: "rgba(255, 255, 255, 0.3)",

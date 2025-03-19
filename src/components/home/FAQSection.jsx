@@ -12,6 +12,12 @@ const FAQSection = () => {
   // Only run client-side effects after hydration
   useEffect(() => {
     setMounted(true);
+    
+    // Safari-specific optimizations
+    document.querySelectorAll('.safari-optimize').forEach(el => {
+      el.style.webkitTransform = 'translateZ(0)';
+      el.style.willChange = 'transform, opacity';
+    });
   }, []);
   
   const faqs = [
@@ -112,11 +118,15 @@ const FAQSection = () => {
               <AnimatePresence>
                 {mounted && activeIndex === index && (
                   <motion.div
+                    className="safari-optimize overflow-hidden"
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
+                    transition={{ 
+                      duration: 0.2,
+                      ease: "easeOut",
+                      opacity: { duration: 0.15 }
+                    }}
                   >
                     <div className="p-6 bg-white border border-gray-100 rounded-b-xl shadow-inner">
                       <p className="text-gray-600">{faq.answer}</p>

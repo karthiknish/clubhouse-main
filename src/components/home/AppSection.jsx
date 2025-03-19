@@ -10,15 +10,22 @@ import MagneticButton from "@/components/MagneticButton";
 const AppSection = () => {
   const sectionRef = useRef(null);
 
-  // Parallax effect for app screenshots
+  // Parallax effect for app screenshots - optimized for Safari
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [200, -50]);
+  // Reduced motion range and simplified transform for better Safari performance
+  const y1 = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [100, -25]);
+  
+  // Force hardware acceleration for Safari
+  const safariFriendlyStyle = {
+    WebkitTransform: "translateZ(0)",
+    willChange: "transform"
+  };
 
   const appFeatures = [
     {
@@ -150,7 +157,7 @@ const AppSection = () => {
             {/* Phone mockups with app screenshots */}
             <motion.div
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10"
-              style={{ y: y1 }}
+              style={{ y: y1, ...safariFriendlyStyle }}
             >
               <div className="relative w-[220px] h-[450px] rounded-[36px] border-8 border-gray-800 bg-gray-800 shadow-xl overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-800 rounded-b-xl z-10" />
@@ -189,7 +196,7 @@ const AppSection = () => {
 
             <motion.div
               className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20"
-              style={{ y: y2 }}
+              style={{ y: y2, ...safariFriendlyStyle }}
             >
               <div className="relative w-[240px] h-[490px] rounded-[40px] border-8 border-gray-800 bg-gray-800 shadow-xl overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-800 rounded-b-xl z-10" />
@@ -211,7 +218,7 @@ const AppSection = () => {
 
             <motion.div
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10"
-              style={{ y: y3 }}
+              style={{ y: y3, ...safariFriendlyStyle }}
             >
               <div className="relative w-[220px] h-[450px] rounded-[36px] border-8 border-gray-800 bg-gray-800 shadow-xl overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-800 rounded-b-xl z-10" />
