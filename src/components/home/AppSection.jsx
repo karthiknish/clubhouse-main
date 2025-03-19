@@ -201,6 +201,8 @@ const AppSection = () => {
                       alt="Clubhouse Benefits App Screen"
                       fill={true}
                       className="object-cover"
+                      priority
+                      unoptimized
                     />
                   </div>
                 </div>

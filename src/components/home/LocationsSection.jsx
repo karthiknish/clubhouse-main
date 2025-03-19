@@ -105,8 +105,9 @@ export default function LocationsSection() {
                 <Image
                   src={city.image}
                   alt={`${city.name} office`}
-                  fill="true"
+                  fill={true}
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  unoptimized
                 />
               </div>
               <div className="p-6">
