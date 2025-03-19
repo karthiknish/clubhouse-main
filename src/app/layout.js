@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Zilla_Slab } from "next/font/google";
 import "./globals.css";
+import "@/styles/safari-optimize.css";
 import Navbar from "@/components/Navbar";
 import { OptimizedMotion } from "@/lib/framerConfig";
 
