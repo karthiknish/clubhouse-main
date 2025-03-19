@@ -80,8 +80,8 @@ export default function LocationsSection() {
             transition={{ delay: 0.3, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Establishing a network of premium workspaces across the UK's most
-            influential cities, designed for innovation and collaboration.
+            Establishing a network of premium workspaces across the UK&apos;s
+            most influential cities, designed for innovation and collaboration.
           </motion.p>
           <AnimatedDivider
             color="bg-green-300"
@@ -100,12 +100,12 @@ export default function LocationsSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className="h-48 relative   overflow-hidden">
+              <div className="h-48 relative overflow-hidden">
                 <div className="absolute inset-0 bg-green-900/20 group-hover:bg-green-900/10 transition-colors duration-300 z-10"></div>
-                <img
+                <Image
                   src={city.image}
                   alt={`${city.name} office`}
-                
+                  fill="true"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>

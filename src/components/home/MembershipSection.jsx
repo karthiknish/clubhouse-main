@@ -63,8 +63,8 @@ export default function MembershipSection() {
             viewport={{ once: true }}
           >
             Joining Clubhouse is not just about gaining access to an exclusive
-            network; it's about becoming part of a dynamic ecosystem designed to
-            elevate your professional and personal life.
+            network; it&apos;s about becoming part of a dynamic ecosystem
+            designed to elevate your professional and personal life.
           </motion.p>
           <AnimatedDivider color="bg-theme" className="mt-8" />
         </div>
@@ -123,7 +123,7 @@ export default function MembershipSection() {
             {
               title: "Golf Pass",
               description:
-                "Your SME Success Story Starts Here. Join the Clubhouse network and unlock your business's full potential.",
+                "Your SME Success Story Starts Here. Join the Clubhouse network and unlock your business&apos;s full potential.",
               icon: (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -20,9 +20,9 @@ const zillaSlab = Zilla_Slab({
 });
 
 export const metadata = {
-  title: "The Clubhouse | London's Premier Business Club & Workspace",
+  title: "The Clubhouse | London&apos;s Premier Business Club & Workspace",
   description:
-    "The Clubhouse is London's leading business club, workspace and meeting venue where professionals meet, work and grow their businesses.",
+    "The Clubhouse is London&apos;s leading business club, workspace and meeting venue where professionals meet, work and grow their businesses.",
 };
 
 export default function RootLayout({ children }) {

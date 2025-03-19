@@ -93,16 +93,16 @@ export default function AboutSection() {
                 An Exclusive Members' Club
               </h3>
               <p className="text-lg text-gray-700">
-                An exclusive members' club and rewards program designed for the
-                innovative minds shaping our world.
+                An exclusive members&apos; club and rewards program designed for
+                the innovative minds shaping our world.
               </p>
               <p className="text-lg text-gray-700">
                 With a community of visionaries, entrepreneurs, and business
                 executives from across the globe, Clubhouse is more than a
-                membership—it's a gateway to unparalleled opportunities. Here,
-                members enjoy access to premium benefits from leading travel,
-                lifestyle, and business brands, fostering both personal and
-                professional growth.
+                membership—it&apos;s a gateway to unparalleled opportunities.
+                Here, members enjoy access to premium benefits from leading
+                travel, lifestyle, and business brands, fostering both personal
+                and professional growth.
               </p>
               <p className="text-lg text-gray-700">
                 Dive into a world where your ambitions are understood, your

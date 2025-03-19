@@ -137,8 +137,8 @@ const AppSection = () => {
             transition={{ delay: 0.3, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Your app for smarter health and wellbeing. Here for you and your family
-            night and day, whenever you need it.
+            Your app for smarter health and wellbeing. Here for you and your
+            family night and day, whenever you need it.
           </motion.p>
           <AnimatedDivider color="bg-theme" className="mt-8" />
         </div>
@@ -303,11 +303,21 @@ const AppSection = () => {
 
               <div className="pt-8 flex flex-col gap-6">
                 <p className="text-gray-700">
-                  Download the application and register using your unique code that will have been sent to you. 
-                  You'll receive this code after purchasing the application via the app store or through your employer's benefits program.
+                  Download the application and register using your unique code
+                  that will have been sent to you. You&apos;ll receive this code
+                  after purchasing the application via the app store or through
+                  your employer&apos;s benefits program.
                 </p>
                 <div className="flex flex-wrap gap-6">
-                  <MagneticButton onClick={() => window.open("https://apps.apple.com/gb/app/clubhouse-benefits/id6499525596", "_blank")} className="bg-black text-white hover:bg-black/90 font-display flex items-center space-x-2">
+                  <MagneticButton
+                    onClick={() =>
+                      window.open(
+                        "https://apps.apple.com/gb/app/clubhouse-benefits/id6499525596",
+                        "_blank"
+                      )
+                    }
+                    className="bg-black text-white hover:bg-black/90 font-display flex items-center space-x-2"
+                  >
                     <img
                       width={150}
                       height={150}
@@ -317,7 +327,15 @@ const AppSection = () => {
                     />
                   </MagneticButton>
 
-                  <MagneticButton onClick={() => window.open("https://play.google.com/store/apps/details?id=com.mydatalife.clubhousebenefits&gl=GB", "_blank")} className="bg-black text-white hover:bg-black/90 font-display flex items-center">
+                  <MagneticButton
+                    onClick={() =>
+                      window.open(
+                        "https://play.google.com/store/apps/details?id=com.mydatalife.clubhousebenefits&gl=GB",
+                        "_blank"
+                      )
+                    }
+                    className="bg-black text-white hover:bg-black/90 font-display flex items-center"
+                  >
                     <img
                       width={150}
                       height={150}

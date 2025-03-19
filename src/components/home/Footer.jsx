@@ -76,7 +76,8 @@ export default function Footer() {
               />
             </div>
             <p className="text-white/80 mb-6 max-w-xs">
-              UK's premier business club for visionaries who shape the future.
+              UK&apos;s premier business club for visionaries who shape the
+              future.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((item) => (
