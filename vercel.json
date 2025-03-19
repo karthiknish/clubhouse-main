@@ -1,15 +1,6 @@
 {
-  "version": 2,
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "images": {
-    "domains": [],
-    "sizes": [16, 32, 48, 64, 96, 128, 256, 384, 512, 1024, 2048],
-    "remotePatterns": [],
-    "minimumCacheTTL": 60
-  }
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "installCommand": "npm install",
+  "outputDirectory": ".next"
 }
