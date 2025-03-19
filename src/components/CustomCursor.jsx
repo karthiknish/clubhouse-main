@@ -12,25 +12,33 @@ export default function CustomCursor() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 25, stiffness: 300 };
+  // Optimize spring config for Safari
+  const springConfig = { damping: 20, stiffness: 200, mass: 0.8 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
     setMounted(true);
 
+    // Throttle mouse move events to reduce CPU usage
+    let lastUpdate = 0;
+    const throttleAmount = 10; // ms
+
     const handleMouseMove = (e) => {
+      const now = Date.now();
+      if (now - lastUpdate < throttleAmount) return;
+
+      lastUpdate = now;
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
       setIsVisible(true);
 
-      // Check if cursor is over a clickable element
+      // Simplified check for clickable elements
       const target = e.target;
       const isClickable =
         target.tagName.toLowerCase() === "button" ||
         target.tagName.toLowerCase() === "a" ||
-        target.closest("button") ||
-        target.closest("a") ||
+        (target.closest && (target.closest("button") || target.closest("a"))) ||
         window.getComputedStyle(target).cursor === "pointer";
 
       setIsPointer(isClickable);
@@ -40,8 +48,10 @@ export default function CustomCursor() {
       setIsVisible(false);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    document.body.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.body.addEventListener("mouseleave", handleMouseLeave, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
@@ -51,6 +61,9 @@ export default function CustomCursor() {
 
   // Only render cursor on client side to avoid hydration mismatch
   if (!mounted) return null;
+
+  // Don't render on mobile/tablet
+  if (typeof window !== "undefined" && window.innerWidth < 1024) return null;
 
   return (
     <>
@@ -64,10 +77,12 @@ export default function CustomCursor() {
           translateY: "-50%",
           opacity: isVisible ? 1 : 0,
           scale: isPointer ? 1.5 : 1,
+          willChange: "transform",
+          transform: "translateZ(0)",
         }}
       />
-      
-      {/* Dot cursor */}
+
+      {/* Dot cursor - simplified */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full mix-blend-difference pointer-events-none z-50"
         style={{
@@ -76,6 +91,8 @@ export default function CustomCursor() {
           translateX: "-50%",
           translateY: "-50%",
           opacity: isVisible ? 1 : 0,
+          willChange: "transform",
+          transform: "translateZ(0)",
         }}
       />
     </>

@@ -65,24 +65,47 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="w-full py-32 relative overflow-hidden">
-      {/* Background geometric shapes */}
+      {/* Background geometric shapes - optimized for Safari */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20"
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 10, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, -10, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {/* Only render these heavy background animations on desktop */}
+        {typeof window !== "undefined" && window.innerWidth >= 1024 && (
+          <>
+            <motion.div
+              className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 10, 0],
+              }}
+              transition={{
+                duration: 30,
+                repeat: Infinity,
+                ease: "linear",
+                repeatType: "loop",
+              }}
+              style={{
+                willChange: "transform",
+                transform: "translateZ(0)",
+              }}
+            />
+            <motion.div
+              className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10"
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, -10, 0],
+              }}
+              transition={{
+                duration: 40,
+                repeat: Infinity,
+                ease: "linear",
+                repeatType: "loop",
+              }}
+              style={{
+                willChange: "transform",
+                transform: "translateZ(0)",
+              }}
+            />
+          </>
+        )}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -207,12 +230,17 @@ export default function AboutSection() {
                         key={index}
                         className="absolute inset-0 safari-optimize"
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: isMounted && index === currentImage ? 1 : 0 }}
+                        animate={{
+                          opacity: isMounted && index === currentImage ? 1 : 0,
+                        }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         style={{
-                          display: isMounted && index === currentImage ? "block" : "none",
+                          display:
+                            isMounted && index === currentImage
+                              ? "block"
+                              : "none",
                           willChange: "transform, opacity",
-                          WebkitTransform: "translateZ(0)"
+                          WebkitTransform: "translateZ(0)",
                         }}
                         suppressHydrationWarning
                       >
@@ -286,7 +314,9 @@ export default function AboutSection() {
                         <motion.button
                           key={index}
                           className={`w-2 h-2 rounded-full ${
-                            isMounted && index === currentImage ? "bg-white" : "bg-white/40"
+                            isMounted && index === currentImage
+                              ? "bg-white"
+                              : "bg-white/40"
                           }`}
                           suppressHydrationWarning
                           whileHover={{ scale: 1.5 }}

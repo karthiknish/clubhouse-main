@@ -20,6 +20,10 @@ export default function ScrollIndicator() {
     }
   };
 
+  // Don't render on mobile for better performance
+  if (!mounted || (typeof window !== "undefined" && window.innerWidth < 768))
+    return null;
+
   return (
     <motion.div
       className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-30"
@@ -27,26 +31,33 @@ export default function ScrollIndicator() {
       animate={{
         opacity: 1,
         y: 0,
-        transition: {
-          delay: 1.5,
-          duration: 0.5,
-        },
+      }}
+      transition={{
+        delay: 1.5,
+        duration: 0.5,
+        ease: "easeOut",
       }}
       onClick={scrollToContent}
+      style={{
+        willChange: "transform, opacity",
+        transform: "translateZ(0)",
+      }}
     >
       <motion.div
         className="flex flex-col items-center"
-        animate={
-          mounted
-            ? {
-                y: [0, 5, 0],
-              }
-            : { y: 0 }
-        }
+        animate={{
+          y: [0, 5, 0],
+        }}
         transition={{
-          duration: 1.5,
+          duration: 2,
           repeat: Infinity,
           repeatType: "loop",
+          ease: "easeInOut",
+          repeatDelay: 0.2,
+        }}
+        style={{
+          willChange: "transform",
+          transform: "translateZ(0)",
         }}
       >
         <p className="text-white text-sm font-medium mb-2">SCROLL</p>

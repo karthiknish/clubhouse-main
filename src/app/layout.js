@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Zilla_Slab } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { OptimizedMotion } from "@/lib/framerConfig";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,11 +29,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${zillaSlab.variable} antialiased`}
       >
-        <Navbar />
-        {children}
+        <OptimizedMotion>
+          <Navbar />
+          {children}
+        </OptimizedMotion>
       </body>
     </html>
   );
