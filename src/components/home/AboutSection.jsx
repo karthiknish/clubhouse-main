@@ -198,7 +198,7 @@ export default function AboutSection() {
                         <Image
                           src={src}
                           alt={`Clubhouse workspace ${index + 1}`}
-                          fill={true}
+                          fill="true"
                           className="object-cover rounded-2xl"
                           priority
                           unoptimized

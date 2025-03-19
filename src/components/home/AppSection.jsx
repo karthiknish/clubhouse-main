@@ -199,7 +199,7 @@ const AppSection = () => {
                     <Image
                       src="/images/app-screen.png"
                       alt="Clubhouse Benefits App Screen"
-                      fill={true}
+                      fill="true"
                       className="object-cover"
                       priority
                       unoptimized
@@ -323,7 +323,7 @@ const AppSection = () => {
                     <img
                       width={150}
                       height={150}
-                      objectFit="contain"
+                      style={{ objectFit: "contain" }}
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD0-VifLPKywOa4lSu4LWfOfsBb-lNBJrrRw&s"
                       alt="App Store"
                     />
@@ -341,7 +341,7 @@ const AppSection = () => {
                     <img
                       width={150}
                       height={150}
-                      objectFit="contain"
+                      style={{ objectFit: "contain" }}
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
                       alt="Google Play Store"
                     />
