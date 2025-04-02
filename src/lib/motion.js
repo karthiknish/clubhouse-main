@@ -37,12 +37,6 @@ export const optimizedViewport = {
   margin: "-100px 0px",
 };
 
-// Detect if the browser is Safari
-export const isSafari = () => {
-  if (typeof window === "undefined") return false;
-  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-};
-
 // Should we use heavy animations?
 export const canUseHeavyAnimations = () => {
   if (typeof window === "undefined") return false;
@@ -51,9 +45,7 @@ export const canUseHeavyAnimations = () => {
 
 // Factory function to create optimized animation variants
 export const createOptimizedAnimations = (customVariants) => {
-  const baseTransition = isSafari()
-    ? { ...optimizedTransition, duration: optimizedTransition.duration * 1.2 }
-    : optimizedTransition;
+  const baseTransition = optimizedTransition;
 
   return {
     hidden: {

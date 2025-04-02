@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { isSafari, optimizedTransform } from "@/lib/motion";
+// Assuming optimizedTransform might be defined elsewhere or not needed now
+// import { optimizedTransform } from "@/lib/motion"; 
 
 export default function AnimatedText({ 
   text, 
@@ -12,14 +13,9 @@ export default function AnimatedText({
   type = "words" // "words" or "chars"
 }) {
   const [mounted, setMounted] = useState(false);
-  const [isLowPerformance, setIsLowPerformance] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Use simpler animations on Safari and mobile
-    setIsLowPerformance(
-      isSafari() || (typeof window !== "undefined" && window.innerWidth < 1024)
-    );
   }, []);
 
   // Split text into words or characters
@@ -32,11 +28,7 @@ export default function AnimatedText({
     visible: (i = 1) => ({
       opacity: 1,
       transition: {
-        staggerChildren: isLowPerformance
-          ? 0.05
-          : type === "words"
-          ? 0.12
-          : 0.04,
+        staggerChildren: type === "words" ? 0.12 : 0.04,
         delayChildren: delay,
       },
     }),
@@ -46,18 +38,20 @@ export default function AnimatedText({
   const child = {
     hidden: {
       opacity: 0,
-      y: isLowPerformance ? 10 : 20,
-      ...(isLowPerformance ? {} : { rotateX: -20, filter: "blur(5px)" }),
+      y: 20,
+      rotateX: -20,
+      filter: "blur(5px)",
     },
     visible: {
       opacity: 1,
       y: 0,
-      ...(isLowPerformance ? {} : { rotateX: 0, filter: "blur(0px)" }),
+      rotateX: 0,
+      filter: "blur(0px)",
       transition: {
         type: "spring",
-        damping: isLowPerformance ? 20 : 12,
-        stiffness: isLowPerformance ? 150 : 100,
-        mass: isLowPerformance ? 0.5 : 1,
+        damping: 12,
+        stiffness: 100,
+        mass: 1,
       },
     },
   };
@@ -74,7 +68,7 @@ export default function AnimatedText({
       initial="hidden"
       whileInView="visible"
       viewport={{ once, amount: 0.3 }}
-      style={optimizedTransform}
+      // Removed style={optimizedTransform}
     >
       {items.map((item, index) => (
         <React.Fragment key={index}>
@@ -82,9 +76,9 @@ export default function AnimatedText({
             variants={child}
             className="inline-block"
             style={{
-              transformStyle: isLowPerformance ? "flat" : "preserve-3d",
+              transformStyle: "preserve-3d",
               display: type === "words" ? "inline-block" : "inline",
-              ...optimizedTransform,
+              // Removed ...optimizedTransform
             }}
           >
             {item}

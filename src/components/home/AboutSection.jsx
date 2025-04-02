@@ -7,36 +7,21 @@ import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import TiltCard from "@/components/TiltCard";
 import MagneticButton from "@/components/MagneticButton";
-import { isSafari, optimizedTransform } from "@/lib/motion";
+import { optimizedTransform } from "@/lib/motion";
 
 export default function AboutSection() {
   // Initialize states with safe defaults for SSR
   const [currentImage, setCurrentImage] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
-  const [isLowPerformance, setIsLowPerformance] = useState(false);
 
   // Only run client-side effects after hydration
   useEffect(() => {
     // Mark component as mounted
     setIsMounted(true);
-    
-    // Detect if this is Safari or a mobile device
-    const isSafariOrMobile = 
-      isSafari() || (typeof window !== "undefined" && window.innerWidth < 1024);
-    
-    setIsLowPerformance(isSafariOrMobile);
-
-    // Apply hardware acceleration to all animated elements
-    if (typeof document !== "undefined") {
-      document.querySelectorAll(".safari-optimize").forEach((el) => {
-        el.style.webkitTransform = "translateZ(0)";
-        el.style.willChange = "transform, opacity";
-      });
-    }
 
     // Auto-rotate images (always enable rotation regardless of device)
     const imageInterval = setInterval(() => {
-      setCurrentImage(prev => (prev === images.length - 1 ? 0 : prev + 1));
+      setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     }, 5000); // Change image every 5 seconds
 
     // Cleanup function
@@ -89,51 +74,38 @@ export default function AboutSection() {
       id="about"
       className="w-full py-20 md:py-32 relative overflow-hidden"
     >
-      {/* Simplified background geometric shapes - static for Safari and mobile */}
+      {/* Background geometric shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {isMounted && isLowPerformance ? (
-          /* Static shapes for low-performance devices */
-          <>
-            <div 
-              className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20"
-            />
-            <div 
-              className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10"
-            />
-          </>
-        ) : (
-          /* Animated shapes for high-performance devices */
-          <>
-            <motion.div
-              className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20 safari-optimize"
-              animate={{
-                scale: [1, 1.05, 1],
-                rotate: [0, 5, 0],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-                repeatType: "loop",
-              }}
-              style={optimizedTransform}
-            />
-            <motion.div
-              className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10 safari-optimize"
-              animate={{
-                scale: [1, 1.1, 1],
-                rotate: [0, -5, 0],
-              }}
-              transition={{
-                duration: 25,
-                repeat: Infinity,
-                ease: "linear",
-                repeatType: "loop",
-              }}
-              style={optimizedTransform}
-            />
-          </>
-        )}
+        <>
+          <motion.div
+            className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20"
+            animate={{
+              scale: [1, 1.05, 1],
+              rotate: [0, 5, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
+            style={optimizedTransform}
+          />
+          <motion.div
+            className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10"
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, -5, 0],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
+            style={optimizedTransform}
+          />
+        </>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -237,10 +209,7 @@ export default function AboutSection() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            <TiltCard
-              className="rounded-2xl overflow-hidden"
-              intensity={isLowPerformance ? 5 : 10}
-            >
+            <TiltCard className="rounded-2xl overflow-hidden" intensity={10}>
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl">
                 {/* Decorative elements */}
                 <div className="absolute -right-16 -bottom-16 w-32 h-32 bg-theme rounded-full opacity-20 z-10" />
@@ -248,7 +217,7 @@ export default function AboutSection() {
 
                 {/* Image Slider */}
                 <motion.div
-                  className="absolute inset-0 w-full h-full safari-optimize"
+                  className="absolute inset-0 w-full h-full"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -259,7 +228,7 @@ export default function AboutSection() {
                     {images.map((src, index) => (
                       <motion.div
                         key={index}
-                        className="absolute inset-0 safari-optimize"
+                        className="absolute inset-0"
                         initial={{ opacity: 0 }}
                         animate={{
                           opacity: isMounted && index === currentImage ? 1 : 0,
@@ -280,7 +249,6 @@ export default function AboutSection() {
                           fill
                           priority={index === 0}
                           className="object-cover rounded-2xl"
-              
                           unoptimized
                         />
                       </motion.div>
@@ -289,7 +257,7 @@ export default function AboutSection() {
                     {/* Slider navigation arrows */}
                     <div className="absolute inset-0 flex items-center justify-between px-4 z-20">
                       <motion.button
-                        className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/30 shadow-lg safari-optimize"
+                        className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/30 shadow-lg"
                         whileHover={{
                           scale: 1.1,
                           backgroundColor: "rgba(255, 255, 255, 0.3)",
@@ -368,7 +336,7 @@ export default function AboutSection() {
             <>
               {/* Top-right card */}
               <motion.div
-                className="absolute -right-10 -top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4 safari-optimize"
+                className="absolute -right-10 -top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.3 }}
@@ -401,7 +369,7 @@ export default function AboutSection() {
 
               {/* Bottom-left card */}
               <motion.div
-                className="absolute -left-10 bottom-20 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4 safari-optimize"
+                className="absolute -left-10 bottom-20 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.3 }}
@@ -434,7 +402,7 @@ export default function AboutSection() {
 
               {/* Bottom-right card */}
               <motion.div
-                className="absolute right-20 bottom-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4 safari-optimize"
+                className="absolute right-20 bottom-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.3 }}
@@ -467,7 +435,7 @@ export default function AboutSection() {
 
               {/* Top-left card */}
               <motion.div
-                className="absolute left-20 top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4 safari-optimize"
+                className="absolute left-20 top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.3 }}

@@ -1,24 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+
 import MagneticButton from "@/components/MagneticButton";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import Image from "next/image";
-import { isSafari, optimizedTransform } from "@/lib/motion";
 
 export default function LocationsSection() {
-  const [mounted, setMounted] = useState(false);
-  const [isLowPerformance, setIsLowPerformance] = useState(true); // Default to low performance for SSR
-
-  useEffect(() => {
-    setMounted(true);
-    // Detect if this is a low-performance device (Safari or mobile/tablet)
-    setIsLowPerformance(
-      isSafari() || (typeof window !== "undefined" && window.innerWidth < 1200)
-    );
-  }, []);
+  // Default to low performance for SSR
 
   // City data with images and descriptions - using smaller images for better performance
   const cities = [
@@ -69,7 +59,6 @@ export default function LocationsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.4 }}
             viewport={{ once: true }}
-            style={optimizedTransform}
           >
             Establishing a network of premium workspaces across the UK&apos;s
             most influential cities, designed for innovation and collaboration.
@@ -89,11 +78,10 @@ export default function LocationsSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                delay: isLowPerformance ? 0.1 : index * 0.1,
+                delay: 0.1,
                 duration: 0.4,
               }}
               viewport={{ once: true }}
-              style={optimizedTransform}
             >
               <div className="h-48 relative overflow-hidden">
                 <div className="absolute inset-0 bg-green-900/20 group-hover:bg-green-900/10 transition-colors duration-300 z-10"></div>
@@ -104,12 +92,7 @@ export default function LocationsSection() {
                     alt={`${city.name} office`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className={`object-cover ${
-                      isLowPerformance
-                        ? ""
-                        : "group-hover:scale-105 transition-transform duration-700"
-                    }`}
-                    unoptimized
+                    className="object-cover  group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
                 </div>
@@ -130,7 +113,6 @@ export default function LocationsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
           viewport={{ once: true }}
-          style={optimizedTransform}
         >
           <h4 className="text-xl md:text-2xl font-bold text-theme mb-4 font-display">
             Ready to join our community?
@@ -141,7 +123,7 @@ export default function LocationsSection() {
           </p>
           <MagneticButton
             className="bg-theme text-white hover:bg-theme/90 font-display"
-            intensity={isLowPerformance ? 10 : 25}
+            intensity={10}
           >
             View All Locations
           </MagneticButton>

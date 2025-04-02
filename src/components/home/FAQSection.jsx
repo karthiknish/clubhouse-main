@@ -12,12 +12,6 @@ const FAQSection = () => {
   // Only run client-side effects after hydration
   useEffect(() => {
     setMounted(true);
-    
-    // Safari-specific optimizations
-    document.querySelectorAll('.safari-optimize').forEach(el => {
-      el.style.webkitTransform = 'translateZ(0)';
-      el.style.willChange = 'transform, opacity';
-    });
   }, []);
   
   const faqs = [
@@ -85,7 +79,8 @@ const FAQSection = () => {
             transition={{ delay: 0.3, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Find answers to common questions about Clubhouse membership, benefits, and services.
+            Find answers to common questions about Clubhouse membership,
+            benefits, and services.
           </motion.p>
           <AnimatedDivider color="bg-theme" className="mt-8" />
         </div>
@@ -110,22 +105,27 @@ const FAQSection = () => {
                 onClick={() => toggleFAQ(index)}
                 suppressHydrationWarning
               >
-                <h3 className="text-xl font-semibold font-display">{faq.question}</h3>
-                <span className="text-2xl transition-transform duration-300 transform" suppressHydrationWarning>
+                <h3 className="text-xl font-semibold font-display">
+                  {faq.question}
+                </h3>
+                <span
+                  className="text-2xl transition-transform duration-300 transform"
+                  suppressHydrationWarning
+                >
                   {mounted && activeIndex === index ? "−" : "+"}
                 </span>
               </button>
               <AnimatePresence>
                 {mounted && activeIndex === index && (
                   <motion.div
-                    className="safari-optimize overflow-hidden"
+                    className="overflow-hidden"
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ 
+                    transition={{
                       duration: 0.2,
                       ease: "easeOut",
-                      opacity: { duration: 0.15 }
+                      opacity: { duration: 0.15 },
                     }}
                   >
                     <div className="p-6 bg-white border border-gray-100 rounded-b-xl shadow-inner">

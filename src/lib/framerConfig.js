@@ -1,7 +1,6 @@
 "use client";
 
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import { isSafari } from "./motion";
 
 // Reduced motion settings for performance concerns
 const reducedMotionSettings = {
@@ -10,7 +9,7 @@ const reducedMotionSettings = {
 };
 
 // Safari-specific settings for better performance
-if (typeof window !== "undefined" && isSafari()) {
+if (typeof window !== "undefined") {
   reducedMotionSettings.transformPagePoint = (point) => {
     // Simplify precision for Safari calculations
     return {
