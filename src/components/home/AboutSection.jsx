@@ -62,9 +62,9 @@ export default function AboutSection() {
       opacity: 1,
       x: 0,
       transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
+        type: "tween", // Changed from spring
+        duration: 0.5, // Added duration
+        ease: "easeOut", // Added ease
       },
     },
   };
@@ -77,34 +77,10 @@ export default function AboutSection() {
       {/* Background geometric shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <>
-          <motion.div
-            className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20"
-            animate={{
-              scale: [1, 1.05, 1],
-              rotate: [0, 5, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear",
-              repeatType: "loop",
-            }}
-            style={optimizedTransform}
-          />
-          <motion.div
-            className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10"
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [0, -5, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear",
-              repeatType: "loop",
-            }}
-            style={optimizedTransform}
-          />
+          {/* Removed animation props and style */}
+          <div className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20" />
+          {/* Removed animation props and style */}
+          <div className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10" />
         </>
       </div>
 
@@ -209,7 +185,8 @@ export default function AboutSection() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            <TiltCard className="rounded-2xl overflow-hidden" intensity={10}>
+            {/* Reduced intensity */}
+            <TiltCard className="rounded-2xl overflow-hidden" intensity={5}>
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl">
                 {/* Decorative elements */}
                 <div className="absolute -right-16 -bottom-16 w-32 h-32 bg-theme rounded-full opacity-20 z-10" />
@@ -233,13 +210,13 @@ export default function AboutSection() {
                         animate={{
                           opacity: isMounted && index === currentImage ? 1 : 0,
                         }}
-                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        // Simplified transition
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         style={{
                           // Always keep all images in the DOM, just hide them
                           // This prevents issues with images not loading
                           opacity: isMounted && index === currentImage ? 1 : 0,
-                          willChange: "transform, opacity",
-                          WebkitTransform: "translateZ(0)",
+                          // Removed willChange and WebkitTransform
                         }}
                         suppressHydrationWarning
                       >
@@ -339,9 +316,10 @@ export default function AboutSection() {
                 className="absolute -right-10 -top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
+                // Adjusted duration
+                transition={{ delay: 0.2, duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                style={optimizedTransform}
+                // Removed style={optimizedTransform}
               >
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
@@ -372,9 +350,10 @@ export default function AboutSection() {
                 className="absolute -left-10 bottom-20 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
+                // Adjusted duration
+                transition={{ delay: 0.3, duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                style={optimizedTransform}
+                // Removed style={optimizedTransform}
               >
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
@@ -405,9 +384,10 @@ export default function AboutSection() {
                 className="absolute right-20 bottom-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.3 }}
+                // Adjusted duration
+                transition={{ delay: 0.4, duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                style={optimizedTransform}
+                // Removed style={optimizedTransform}
               >
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
@@ -438,9 +418,10 @@ export default function AboutSection() {
                 className="absolute left-20 top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.3 }}
+                // Adjusted duration
+                transition={{ delay: 0.5, duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                style={optimizedTransform}
+                // Removed style={optimizedTransform}
               >
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
