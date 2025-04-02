@@ -1,15 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
-
+import { motion } from "framer-motion"; // Keep for subtitle animation
 import MagneticButton from "@/components/MagneticButton";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import Image from "next/image";
 
 export default function LocationsSection() {
-  // Default to low performance for SSR
-
   // City data with images and descriptions - using smaller images for better performance
   const cities = [
     {
@@ -53,6 +50,7 @@ export default function LocationsSection() {
             className="text-4xl md:text-5xl font-bold font-display text-theme mb-4 md:mb-6"
             type="words"
           />
+          {/* Keep simple subtitle animation */}
           <motion.p
             className="text-lg md:text-xl text-theme/90 max-w-3xl mx-auto px-4"
             initial={{ opacity: 0, y: 10 }}
@@ -60,8 +58,8 @@ export default function LocationsSection() {
             transition={{ delay: 0.2, duration: 0.4 }}
             viewport={{ once: true }}
           >
-            Establishing a network of premium workspaces across the UK&apos;s
-            most influential cities, designed for innovation and collaboration.
+            Establishing a network of premium workspaces across the UK's most
+            influential cities, designed for innovation and collaboration.
           </motion.p>
           <AnimatedDivider
             color="bg-theme"
@@ -69,19 +67,12 @@ export default function LocationsSection() {
           />
         </div>
 
-        {/* Location cards grid with optimized animations */}
+        {/* Location cards grid - Static */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {cities.map((city, index) => (
-            <motion.div
+            <div
               key={index}
               className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.1,
-                duration: 0.4,
-              }}
-              viewport={{ once: true }}
             >
               <div className="h-48 relative overflow-hidden">
                 <div className="absolute inset-0 bg-green-900/20 group-hover:bg-green-900/10 transition-colors duration-300 z-10"></div>
@@ -92,7 +83,7 @@ export default function LocationsSection() {
                     alt={`${city.name} office`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover  group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700" // Keep hover scale
                     loading="lazy"
                   />
                 </div>
@@ -102,18 +93,12 @@ export default function LocationsSection() {
                   {city.name}
                 </h3>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* CTA - simplified animation */}
-        <motion.div
-          className="text-center bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto mt-16 md:mt-20 shadow-md"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        {/* CTA - Static */}
+        <div className="text-center bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto mt-16 md:mt-20 shadow-md">
           <h4 className="text-xl md:text-2xl font-bold text-theme mb-4 font-display">
             Ready to join our community?
           </h4>
@@ -123,11 +108,11 @@ export default function LocationsSection() {
           </p>
           <MagneticButton
             className="bg-theme text-white hover:bg-theme/90 font-display"
-            intensity={10}
+            intensity={10} // Keep magnetic effect if desired
           >
             View All Locations
           </MagneticButton>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

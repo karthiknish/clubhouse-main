@@ -9,8 +9,7 @@ import {
   Globe,
   Heart,
 } from "lucide-react";
-
-import TiltCard from "@/components/TiltCard";
+// Removed TiltCard import
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import MagneticButton from "@/components/MagneticButton";
@@ -139,43 +138,15 @@ export default function MembershipSection() {
               textColor: "text-theme",
             },
           ].map((benefit, index) => (
-            <TiltCard key={index} className="h-full" intensity={5}>
-              <motion.div
-                className="bg-white rounded-xl overflow-hidden shadow-xl h-full group hover:shadow-2xl transition-shadow duration-500"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.1,
-                  duration: 0.4,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true, margin: "-30px" }}
-              >
+            // Removed TiltCard wrapper
+            <div key={index} className="h-full">
+              {/* Removed motion wrapper and animation props */}
+              <div className="bg-white rounded-xl overflow-hidden shadow-xl h-full group hover:shadow-2xl transition-shadow duration-500">
                 {/* Card header with gradient */}
                 <div
                   className={`h-24 bg-gradient-to-r ${benefit.color} flex items-center justify-center relative overflow-hidden`}
                 >
-                  {/* Animated background particles */}
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-white/30 rounded-full"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                      }}
-                      animate={{
-                        x: [0, Math.random() * 50 - 25],
-                        y: [0, Math.random() * 50 - 25],
-                        opacity: [0.3, 0.8, 0.3],
-                      }}
-                      transition={{
-                        duration: 3 + Math.random() * 2,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    />
-                  ))}
+                  {/* Removed Animated background particles */}
 
                   {/* Icon */}
                   <div
@@ -194,19 +165,13 @@ export default function MembershipSection() {
                   </h3>
                   <p className="text-gray-600 mb-4">{benefit.description}</p>
                 </div>
-              </motion.div>
-            </TiltCard>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Call to action */}
-        <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
-          viewport={{ once: true }}
-        >
+        {/* Call to action - Removed motion wrapper */}
+        <div className="mt-20 text-center">
           <MagneticButton
             onClick={() => {
               window.location.href = "/contact";
@@ -216,7 +181,7 @@ export default function MembershipSection() {
           >
             Explore Membership Options
           </MagneticButton>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

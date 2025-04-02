@@ -1,13 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // Keep for image slider
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
-import TiltCard from "@/components/TiltCard";
 import MagneticButton from "@/components/MagneticButton";
-import { optimizedTransform } from "@/lib/motion";
+// Removed TiltCard and optimizedTransform imports
 
 export default function AboutSection() {
   // Initialize states with safe defaults for SSR
@@ -46,40 +45,18 @@ export default function AboutSection() {
       setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
     }
   };
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
 
-  const revealFromLeft = {
-    hidden: { opacity: 0, x: -100 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: "tween", // Changed from spring
-        duration: 0.5, // Added duration
-        ease: "easeOut", // Added ease
-      },
-    },
-  };
+  // Removed staggerContainer and revealFromLeft variants
 
   return (
     <section
       id="about"
       className="w-full py-20 md:py-32 relative overflow-hidden"
     >
-      {/* Background geometric shapes */}
+      {/* Background geometric shapes - Static */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <>
-          {/* Removed animation props and style */}
           <div className="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-theme/10 opacity-20" />
-          {/* Removed animation props and style */}
           <div className="absolute -left-40 bottom-20 w-[500px] h-[500px] rounded-full bg-theme/5 opacity-10" />
         </>
       </div>
@@ -96,29 +73,23 @@ export default function AboutSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-center">
-          {/* Left content column */}
-          <motion.div
-            className="lg:col-span-5 space-y-6 md:space-y-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-          >
-            <motion.div variants={revealFromLeft} className="space-y-6">
+          {/* Left content column - Static */}
+          <div className="lg:col-span-5 space-y-6 md:space-y-8">
+            <div className="space-y-6">
               <h3 className="text-3xl font-bold text-theme font-display">
                 An Exclusive Members' Club
               </h3>
               <p className="text-lg text-gray-700">
-                An exclusive members&apos; club and rewards program designed for
-                the innovative minds shaping our world.
+                An exclusive members' club and rewards program designed for the
+                innovative minds shaping our world.
               </p>
               <p className="text-lg text-gray-700">
                 With a community of visionaries, entrepreneurs, and business
                 executives from across the globe, Clubhouse is more than a
-                membership—it&apos;s a gateway to unparalleled opportunities.
-                Here, members enjoy access to premium benefits from leading
-                travel, lifestyle, and business brands, fostering both personal
-                and professional growth.
+                membership—it's a gateway to unparalleled opportunities. Here,
+                members enjoy access to premium benefits from leading travel,
+                lifestyle, and business brands, fostering both personal and
+                professional growth.
               </p>
               <p className="text-lg text-gray-700">
                 Dive into a world where your ambitions are understood, your
@@ -126,10 +97,10 @@ export default function AboutSection() {
                 Welcome to where the future leaders connect, innovate, and
                 thrive.
               </p>
-            </motion.div>
+            </div>
 
-            {/* Feature list with animations */}
-            <motion.div variants={revealFromLeft} className="pt-6">
+            {/* Feature list - Static */}
+            <div className="pt-6">
               <h4 className="text-xl font-semibold mb-6 text-theme font-display">
                 Supporting SME Businesses
               </h4>
@@ -142,14 +113,7 @@ export default function AboutSection() {
                   "Networking and Partnerships: New connections and opportunities",
                   "Peer Support and Mentorship: Navigate obstacles and grow",
                 ].map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-start gap-3"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
+                  <div key={index} className="flex items-start gap-3">
                     <div className="mt-1 text-theme bg-theme/10 p-1 rounded-full">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -165,34 +129,31 @@ export default function AboutSection() {
                       </svg>
                     </div>
                     <p className="text-gray-700">{feature}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div variants={revealFromLeft}>
+            {/* Static Button */}
+            <div>
               <MagneticButton className="mt-8 bg-theme text-white hover:bg-theme/90 font-display">
                 Become a Member
               </MagneticButton>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* Right image column with 3D tilt effect */}
-          <motion.div
-            className="lg:col-span-7 relative"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            {/* Reduced intensity */}
-            <TiltCard className="rounded-2xl overflow-hidden" intensity={5}>
+          {/* Right image column - Static wrapper */}
+          <div className="lg:col-span-7 relative">
+            {/* Removed TiltCard */}
+            <div className="rounded-2xl overflow-hidden shadow-lg">
+              {" "}
+              {/* Added shadow */}
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl">
                 {/* Decorative elements */}
                 <div className="absolute -right-16 -bottom-16 w-32 h-32 bg-theme rounded-full opacity-20 z-10" />
                 <div className="absolute -left-16 -top-16 w-32 h-32 bg-theme rounded-full opacity-20 z-10" />
 
-                {/* Image Slider */}
+                {/* Image Slider - Kept motion for fade effect */}
                 <motion.div
                   className="absolute inset-0 w-full h-full"
                   initial={{ opacity: 0 }}
@@ -210,13 +171,9 @@ export default function AboutSection() {
                         animate={{
                           opacity: isMounted && index === currentImage ? 1 : 0,
                         }}
-                        // Simplified transition
                         transition={{ duration: 0.3, ease: "easeOut" }}
                         style={{
-                          // Always keep all images in the DOM, just hide them
-                          // This prevents issues with images not loading
                           opacity: isMounted && index === currentImage ? 1 : 0,
-                          // Removed willChange and WebkitTransform
                         }}
                         suppressHydrationWarning
                       >
@@ -231,7 +188,7 @@ export default function AboutSection() {
                       </motion.div>
                     ))}
 
-                    {/* Slider navigation arrows */}
+                    {/* Slider navigation arrows - Kept motion for hover/tap */}
                     <div className="absolute inset-0 flex items-center justify-between px-4 z-20">
                       <motion.button
                         className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/30 shadow-lg"
@@ -284,7 +241,7 @@ export default function AboutSection() {
                       </motion.button>
                     </div>
 
-                    {/* Slider indicators */}
+                    {/* Slider indicators - Kept motion for hover/tap */}
                     <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
                       {images.map((_, index) => (
                         <motion.button
@@ -307,20 +264,12 @@ export default function AboutSection() {
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-theme/30 to-transparent rounded-2xl" />
               </div>
-            </TiltCard>
+            </div>
 
-            {/* Floating stats cards - always visible with performance optimizations */}
+            {/* Floating stats cards - Static */}
             <>
               {/* Top-right card */}
-              <motion.div
-                className="absolute -right-10 -top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                // Adjusted duration
-                transition={{ delay: 0.2, duration: 0.4 }}
-                viewport={{ once: true, margin: "-50px" }}
-                // Removed style={optimizedTransform}
-              >
+              <div className="absolute -right-10 -top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -343,18 +292,10 @@ export default function AboutSection() {
                     2,500+
                   </p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Bottom-left card */}
-              <motion.div
-                className="absolute -left-10 bottom-20 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                // Adjusted duration
-                transition={{ delay: 0.3, duration: 0.4 }}
-                viewport={{ once: true, margin: "-50px" }}
-                // Removed style={optimizedTransform}
-              >
+              <div className="absolute -left-10 bottom-20 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -377,18 +318,10 @@ export default function AboutSection() {
                     Prime Areas
                   </p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Bottom-right card */}
-              <motion.div
-                className="absolute right-20 bottom-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                // Adjusted duration
-                transition={{ delay: 0.4, duration: 0.4 }}
-                viewport={{ once: true, margin: "-50px" }}
-                // Removed style={optimizedTransform}
-              >
+              <div className="absolute right-20 bottom-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -411,18 +344,10 @@ export default function AboutSection() {
                     50+
                   </p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Top-left card */}
-              <motion.div
-                className="absolute left-20 top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                // Adjusted duration
-                transition={{ delay: 0.5, duration: 0.4 }}
-                viewport={{ once: true, margin: "-50px" }}
-                // Removed style={optimizedTransform}
-              >
+              <div className="absolute left-20 top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
                 <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -445,9 +370,9 @@ export default function AboutSection() {
                     150+
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
