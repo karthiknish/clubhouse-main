@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import CustomCursor from "@/components/CustomCursor";
+import Navbar from "@/components/Navbar";
 
 // Import all home components
 import {
@@ -47,6 +48,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between relative overflow-hidden">
+      <Navbar />
       {/* Custom cursor - only rendered on client side */}
       {mounted && (
         <CustomCursor

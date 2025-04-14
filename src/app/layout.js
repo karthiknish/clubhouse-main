@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono, Zilla_Slab } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import { OptimizedMotion } from "@/lib/framerConfig";
 
 const geistSans = Geist({
@@ -38,10 +37,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${zillaSlab.variable} antialiased`}
       >
-        <OptimizedMotion>
-          <Navbar />
-          {children}
-        </OptimizedMotion>
+        <OptimizedMotion>{children}</OptimizedMotion>
       </body>
     </html>
   );
