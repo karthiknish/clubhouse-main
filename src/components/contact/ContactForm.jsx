@@ -8,30 +8,30 @@ export default function ContactForm() {
     name: "",
     email: "",
     phone: "",
-    subject: "General Inquiry",
+    subject: "General Enquiry",
     message: "",
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      
+
       // Reset form after showing success message
       setTimeout(() => {
         setFormData({
@@ -45,7 +45,7 @@ export default function ContactForm() {
       }, 3000);
     }, 1500);
   };
-  
+
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
       <h2 className="text-2xl font-bold font-display text-theme mb-6">
@@ -137,7 +137,7 @@ export default function ContactForm() {
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-theme focus:border-theme transition-all outline-none"
               >
-                <option value="General Inquiry">General Inquiry</option>
+                <option value="General Inquiry">General Enquiry</option>
                 <option value="Membership">Membership Information</option>
                 <option value="Tour Request">Schedule a Tour</option>
                 <option value="Event Space">Event Space Booking</option>
