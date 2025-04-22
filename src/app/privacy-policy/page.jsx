@@ -2,9 +2,14 @@
 
 import React from "react";
 
+import LegalSimpleNav from "@/components/LegalSimpleNav";
+import Footer from "@/components/home/Footer";
+
 export default function PrivacyPolicy() {
   return (
-    <main className="flex min-h-screen flex-col bg-white text-theme">
+    <>
+      <LegalSimpleNav logoSrc="/images/GreenLogo.svg" />
+      <main className="flex min-h-screen flex-col bg-white text-theme">
       <section className="max-w-3xl mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold mb-8 font-display">Privacy Policy</h1>
         <p className="mb-2 text-lg font-semibold">Effective Date: 01.04.24</p>
@@ -50,5 +55,7 @@ export default function PrivacyPolicy() {
         <a href="mailto:support@theclubhouse.co.uk" className="text-blue-700 underline">support@theclubhouse.co.uk</a>
       </section>
     </main>
+      <Footer />
+    </>
   );
 }

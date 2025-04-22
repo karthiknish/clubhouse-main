@@ -2,9 +2,14 @@
 
 import React from "react";
 
+import LegalSimpleNav from "@/components/LegalSimpleNav";
+import Footer from "@/components/home/Footer";
+
 export default function TermsAndConditions() {
   return (
-    <main className="flex min-h-screen flex-col bg-white text-theme">
+    <>
+      <LegalSimpleNav logoSrc="/images/GreenLogo.svg" />
+      <main className="flex min-h-screen flex-col bg-white text-theme">
       <section className="max-w-3xl mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold mb-8 font-display">Terms and Conditions</h1>
         <h2 className="text-2xl font-semibold mt-10 mb-2">1. Use of Services</h2>
@@ -51,5 +56,7 @@ export default function TermsAndConditions() {
         </div>
       </section>
     </main>
+      <Footer />
+    </>
   );
 }
