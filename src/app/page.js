@@ -80,9 +80,7 @@ export default function Home() {
       {/* Testimonials Section */}
 
       {/* Card Section */}
-      <section id="card" className="w-full">
-        <CardSection />
-      </section>
+      
 
       {/* App Section */}
       <section id="app" className="w-full">

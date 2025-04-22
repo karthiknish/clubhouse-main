@@ -35,16 +35,7 @@ const FAQSection = () => {
       answer:
         "Yes, we offer various membership tiers to suit different needs and budgets. These range from flexible hot-desking options to dedicated private offices and premium all-access memberships."
     },
-    {
-      question: "Can I book meeting rooms or event spaces?",
-      answer:
-        "Yes, members can book meeting rooms, event spaces, and other facilities through our mobile app or website. Non-members may also book event spaces subject to availability and approval."
-    },
-    {
-      question: "Do you have locations outside of the UK?",
-      answer:
-        "Currently, our locations are exclusively in the UK, with spaces in London, Manchester, Birmingham, Edinburgh, Cardiff, Leeds, Glasgow, and Newcastle. We're continuously expanding and may open international locations in the future."
-    }
+
   ];
 
   // Only initialize client-side state after mounting

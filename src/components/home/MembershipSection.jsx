@@ -80,6 +80,8 @@ export default function MembershipSection() {
           <AnimatedDivider color="bg-theme" className="mt-6 md:mt-8" />
         </div>
 
+
+
         {/* Interactive 3D membership cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 relative z-10">
           {[
@@ -88,24 +90,6 @@ export default function MembershipSection() {
               description:
                 "Supercharge Your Business Growth. Tap into the power of collaboration and resources with Clubhouse membership.",
               icon: <Building2 className="h-8 w-8" />,
-              color: "from-theme to-theme/80",
-              iconBg: "bg-theme/10",
-              textColor: "text-theme",
-            },
-            {
-              title: "Airport Lounge Access",
-              description:
-                "Not Just an Idea, a Thriving Business. Get the tools and support you need to scale with a Clubhouse membership.",
-              icon: <Plane className="h-8 w-8" />,
-              color: "from-theme to-theme/80",
-              iconBg: "bg-theme/10",
-              textColor: "text-theme",
-            },
-            {
-              title: "Golf Pass",
-              description:
-                "Your SME Success Story Starts Here. Join the Clubhouse network and unlock your business's full potential.",
-              icon: <LandPlot className="h-8 w-8" />,
               color: "from-theme to-theme/80",
               iconBg: "bg-theme/10",
               textColor: "text-theme",
@@ -133,6 +117,24 @@ export default function MembershipSection() {
               description:
                 "Success Doesn't Happen Alone. Find mentorship, support, and growth within the Clubhouse network.",
               icon: <Heart className="h-8 w-8" />,
+              color: "from-theme to-theme/80",
+              iconBg: "bg-theme/10",
+              textColor: "text-theme",
+            },
+            {
+              title: "Business Networking",
+              description:
+                "Connect with industry leaders and peers to expand your business network and discover new opportunities.",
+              icon: <Globe className="h-8 w-8" />,
+              color: "from-theme to-theme/80",
+              iconBg: "bg-theme/10",
+              textColor: "text-theme",
+            },
+            {
+              title: "Exclusive Events",
+              description:
+                "Gain access to exclusive member-only events, workshops, and seminars designed for growth.",
+              icon: <GraduationCap className="h-8 w-8" />,
               color: "from-theme to-theme/80",
               iconBg: "bg-theme/10",
               textColor: "text-theme",
