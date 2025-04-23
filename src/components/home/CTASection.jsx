@@ -61,13 +61,7 @@ export default function CTASection() {
               Apply for Membership
             </MagneticButton>
 
-            <MagneticButton
-              variant="outline"
-              size="lg"
-              className="border-green-950 text-green-950 hover:bg-green-950/10 text-lg px-8 py-6 font-display"
-            >
-              View Membership Options
-            </MagneticButton>
+
           </motion.div>
         </motion.div>
       </div>
