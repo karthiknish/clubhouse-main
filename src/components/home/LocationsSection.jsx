@@ -58,8 +58,7 @@ export default function LocationsSection() {
             transition={{ delay: 0.2, duration: 0.4 }}
             viewport={{ once: true }}
           >
-            Establishing a network of premium workspaces across the UK's most
-            influential cities, designed for innovation and collaboration.
+            Establishing networking opportunities throughout the UK with a network in the most Influential Cities, designed for innovation and collaboration.
           </motion.p>
           <AnimatedDivider
             color="bg-theme"
@@ -97,22 +96,7 @@ export default function LocationsSection() {
           ))}
         </div>
 
-        {/* CTA - Static */}
-        <div className="text-center bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto mt-16 md:mt-20 shadow-md">
-          <h4 className="text-xl md:text-2xl font-bold text-theme mb-4 font-display">
-            Ready to join our community?
-          </h4>
-          <p className="text-theme text-base md:text-lg mb-6 max-w-2xl mx-auto">
-            Access all our premium locations with a single membership. Work from
-            anywhere in our nationwide network.
-          </p>
-          <MagneticButton
-            className="bg-theme text-white hover:bg-theme/90 font-display"
-            intensity={10} // Keep magnetic effect if desired
-          >
-            View All Locations
-          </MagneticButton>
-        </div>
+
       </div>
     </section>
   );

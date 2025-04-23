@@ -18,7 +18,7 @@ const FAQSection = () => {
     {
       question: "What is Clubhouse?",
       answer:
-        "Clubhouse is a premium workspace and community hub designed for professionals, entrepreneurs, and creatives. We provide state-of-the-art facilities, networking opportunities, and exclusive benefits to help our members thrive in their careers and businesses."
+        "an exclusive members' club and rewards program designed for owners of small to medium businesses ."
     },
     {
       question: "How do I become a member?",

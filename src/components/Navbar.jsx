@@ -88,7 +88,7 @@ export default function Navbar() {
               label="Locations"
               isScrolled={isScrolled}
             />
-            <NavLink href="#card" label="Card" isScrolled={isScrolled} />
+           
             <NavLink href="#app" label="App" isScrolled={isScrolled} />
             <NavLink
               href="#testimonials"

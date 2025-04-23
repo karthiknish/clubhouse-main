@@ -8,6 +8,7 @@ import {
   GraduationCap,
   Globe,
   Heart,
+  Handshake,
 } from "lucide-react";
 // Removed TiltCard import
 import AnimatedText from "@/components/AnimatedText";
@@ -98,7 +99,7 @@ export default function MembershipSection() {
               title: "Clubhouse Education",
               description:
                 "Knowledge is Power. Collaboration is Growth. Unleash the benefits of a supportive SME community with Clubhouse.",
-              icon: <GraduationCap className="h-8 w-8" />,
+              icon: <Handshake className="h-8 w-8" />,
               color: "from-theme to-theme/80",
               iconBg: "bg-theme/10",
               textColor: "text-theme",
@@ -134,7 +135,7 @@ export default function MembershipSection() {
               title: "Exclusive Events",
               description:
                 "Gain access to exclusive member-only events, workshops, and seminars designed for growth.",
-              icon: <GraduationCap className="h-8 w-8" />,
+              icon: <Handshake className="h-8 w-8" />,
               color: "from-theme to-theme/80",
               iconBg: "bg-theme/10",
               textColor: "text-theme",
