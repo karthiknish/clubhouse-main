@@ -18,7 +18,7 @@ const FAQSection = () => {
     {
       question: "What is Clubhouse?",
       answer:
-        "an exclusive members' club and rewards program designed for owners of small to medium businesses ."
+        "An Exclusive members club and rewards program designed for owners of small to medium businesses ."
     },
     {
       question: "How do I become a member?",
@@ -28,12 +28,12 @@ const FAQSection = () => {
     {
       question: "What are the membership benefits?",
       answer:
-        "Membership benefits include access to premium workspaces, meeting rooms, networking events, wellness programs, and our exclusive Clubhouse Benefits app which provides 24/7 GP services, counseling, financial advice, and mental health support."
+        "Access to exclusive savings, educational resources, marketing support, well-being programs, professional networking opportunities, and private events."
     },
     {
       question: "Are there different membership tiers?",
       answer:
-        "Yes, we offer various membership tiers to suit different needs and budgets. These range from flexible hot-desking options to dedicated private offices and premium all-access memberships."
+        "We offer three distinct membership tiers, each granting a tailored level of access to the Clubhouse, thoughtfully designed to meet your business needs - contact us to discuss"
     },
 
   ];
