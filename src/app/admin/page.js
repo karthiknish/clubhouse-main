@@ -43,6 +43,29 @@ const DEFAULT_ASSURANCE_ITEM = {
 };
 
 const DEFAULT_IMAGE = {
+  src: "",
+  alt: "",
+};
+
+const DEFAULT_HOME_STAT = {
+  label: "",
+  value: "",
+};
+
+const PAGE_LABELS = {
+  home: "Home Page",
+  clubHospitality: "Club Hospitality",
+  luxuryTravel: "Luxury Travel",
+};
+
+const formatPageLabel = (key) =>
+  PAGE_LABELS[key] ||
+  key.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase());
+
+const AdminPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState(null);
   const [selectedPage, setSelectedPage] = useState("");
@@ -60,7 +83,9 @@ const DEFAULT_IMAGE = {
         setIsAuthenticated(true);
       } catch (error) {
         if (error.message !== "401") {
-          setErrorMessage("Failed to load content. Please try again after logging in.");
+          setErrorMessage(
+            "Failed to load content. Please try again after logging in."
+          );
         }
       } finally {
         setLoading(false);
@@ -171,7 +196,10 @@ const DEFAULT_IMAGE = {
           </p>
           <form className="mt-6 space-y-4" onSubmit={handleLogin}>
             <div>
-              <label className="block text-sm font-medium text-[#393F37]" htmlFor="username">
+              <label
+                className="block text-sm font-medium text-[#393F37]"
+                htmlFor="username"
+              >
                 Username
               </label>
               <input
@@ -184,7 +212,10 @@ const DEFAULT_IMAGE = {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#393F37]" htmlFor="password">
+              <label
+                className="block text-sm font-medium text-[#393F37]"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
@@ -224,7 +255,10 @@ const DEFAULT_IMAGE = {
 
     if (selectedPage === "home") {
       return (
-        <HomeEditor data={pageData} onChange={(updated) => updatePageContent("home", updated)} />
+        <HomeEditor
+          data={pageData}
+          onChange={(updated) => updatePageContent("home", updated)}
+        />
       );
     }
 
@@ -259,9 +293,12 @@ const DEFAULT_IMAGE = {
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
         <header className="flex flex-col justify-between gap-4 rounded-2xl bg-white p-6 shadow-xl lg:flex-row lg:items-center">
           <div>
-            <h1 className="text-3xl font-semibold text-[#1f2620]">Content Editor</h1>
+            <h1 className="text-3xl font-semibold text-[#1f2620]">
+              Content Editor
+            </h1>
             <p className="mt-2 text-sm text-[#55594F]">
-              Edit the fields below and save to update the live pages immediately.
+              Edit the fields below and save to update the live pages
+              immediately.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -302,7 +339,9 @@ const DEFAULT_IMAGE = {
                   </button>
                 ))
               ) : (
-                <p className="text-sm text-[#55594F]">No editable pages found.</p>
+                <p className="text-sm text-[#55594F]">
+                  No editable pages found.
+                </p>
               )}
             </div>
           </aside>
