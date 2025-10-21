@@ -8,10 +8,63 @@ import AnimatedDivider from "@/components/AnimatedDivider";
 import MagneticButton from "@/components/MagneticButton";
 // Removed TiltCard and optimizedTransform imports
 
-export default function AboutSection() {
+const DEFAULT_PARAGRAPHS = [
+  "An exclusive members' club and rewards program designed for the innovative minds shaping our world.",
+  "With a community of visionaries, entrepreneurs, and business executives from across the globe, Clubhouse is more than a membership—it's a gateway to unparalleled opportunities. Here, members enjoy access to premium benefits from leading travel, lifestyle, and business brands, fostering both personal and professional growth.",
+  "Dive into a world where your ambitions are understood, your potential is recognised, and your achievements are celebrated. Welcome to where the future leaders connect, innovate, and thrive.",
+];
+
+const DEFAULT_FEATURES = [
+  "Access to Resources: Market research, funding opportunities, training programs",
+  "Collaboration Opportunities: Joint ventures, co-marketing efforts",
+  "Strength in Numbers: Better terms with suppliers, group discounts",
+  "Knowledge Sharing: Best practices, industry insights",
+  "Networking and Partnerships: New connections and opportunities",
+  "Peer Support and Mentorship: Navigate obstacles and grow",
+];
+
+const DEFAULT_IMAGES = [
+  "https://lirp.cdn-website.com/93173ee8/dms3rep/multi/opt/2148817070-1920w.jpg",
+  "https://lirp.cdn-website.com/93173ee8/dms3rep/multi/opt/CLUBHOUSE+%2812%29-1920w.jpg",
+  "/images/about.jpeg",
+  "/images/about2.jpeg",
+  "https://lirp.cdn-website.com/93173ee8/dms3rep/multi/opt/CLUBHOUSE+%284%29-1920w.jpg",
+];
+
+const DEFAULT_STATS = [
+  { label: "Community", value: "Diverse minds" },
+  { label: "Events", value: "Monthly events" },
+  { label: "Locations", value: "Prime Areas" },
+  { label: "Brand Partners", value: "Leading brands" },
+];
+
+const STAT_POSITIONS = [
+  "absolute left-10 top-10",
+  "absolute right-24 top-32",
+  "absolute -left-10 bottom-20",
+  "absolute right-20 bottom-10",
+];
+
+export default function AboutSection({ content, onCtaEnter, onCtaLeave }) {
   // Initialize states with safe defaults for SSR
   const [currentImage, setCurrentImage] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
+
+  const sectionTitle = content?.sectionTitle ?? "Welcome to Clubhouse";
+  const heading = content?.heading ?? "An Exclusive Members' Club";
+  const paragraphs = content?.paragraphs?.length
+    ? content.paragraphs
+    : DEFAULT_PARAGRAPHS;
+  const featuresTitle = content?.featuresTitle ?? "Supporting SME Businesses";
+  const features = content?.features?.length
+    ? content.features
+    : DEFAULT_FEATURES;
+  const ctaLabel = content?.ctaLabel ?? "Become a Member";
+  const images = content?.images?.length ? content.images : DEFAULT_IMAGES;
+  const stats = (content?.stats?.length ? content.stats : DEFAULT_STATS).slice(
+    0,
+    STAT_POSITIONS.length
+  );
 
   // Only run client-side effects after hydration
   useEffect(() => {
@@ -27,14 +80,7 @@ export default function AboutSection() {
     return () => {
       if (imageInterval) clearInterval(imageInterval);
     };
-  }, []);
-  const images = [
-    "https://lirp.cdn-website.com/93173ee8/dms3rep/multi/opt/2148817070-1920w.jpg",
-    "https://lirp.cdn-website.com/93173ee8/dms3rep/multi/opt/CLUBHOUSE+%2812%29-1920w.jpg",
-    "/images/about.jpeg",
-    "/images/about2.jpeg",
-    "https://lirp.cdn-website.com/93173ee8/dms3rep/multi/opt/CLUBHOUSE+%284%29-1920w.jpg",
-  ];
+  }, [images.length]);
 
   const nextImage = () => {
     if (isMounted) {
@@ -67,7 +113,7 @@ export default function AboutSection() {
         {/* Section header with animated text */}
         <div className="text-center mb-16 md:mb-20">
           <AnimatedText
-            text="Welcome to Clubhouse"
+            text={sectionTitle}
             className="text-4xl md:text-5xl font-bold mb-6 font-display text-theme"
             type="words"
           />
@@ -79,42 +125,22 @@ export default function AboutSection() {
           <div className="lg:col-span-5 space-y-6 md:space-y-8">
             <div className="space-y-6">
               <h3 className="text-3xl font-bold text-theme font-display">
-                An Exclusive Members' Club
+                {heading}
               </h3>
-              <p className="text-lg text-gray-700">
-                An exclusive members' club and rewards program designed for the
-                innovative minds shaping our world.
-              </p>
-              <p className="text-lg text-gray-700">
-                With a community of visionaries, entrepreneurs, and business
-                executives from across the globe, Clubhouse is more than a
-                membership—it's a gateway to unparalleled opportunities. Here,
-                members enjoy access to premium benefits from leading travel,
-                lifestyle, and business brands, fostering both personal and
-                professional growth.
-              </p>
-              <p className="text-lg text-gray-700">
-                Dive into a world where your ambitions are understood, your
-                potential is recognised, and your achievements are celebrated.
-                Welcome to where the future leaders connect, innovate, and
-                thrive.
-              </p>
+              {paragraphs.map((paragraph, index) => (
+                <p key={index} className="text-lg text-gray-700">
+                  {paragraph}
+                </p>
+              ))}
             </div>
 
             {/* Feature list - Static */}
             <div className="pt-6">
               <h4 className="text-xl font-semibold mb-6 text-theme font-display">
-                Supporting SME Businesses
+                {featuresTitle}
               </h4>
               <div className="space-y-4">
-                {[
-                  "Access to Resources: Market research, funding opportunities, training programs",
-                  "Collaboration Opportunities: Joint ventures, co-marketing efforts",
-                  "Strength in Numbers: Better terms with suppliers, group discounts",
-                  "Knowledge Sharing: Best practices, industry insights",
-                  "Networking and Partnerships: New connections and opportunities",
-                  "Peer Support and Mentorship: Navigate obstacles and grow",
-                ].map((feature, index) => (
+                {features.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="mt-1 text-theme bg-theme/10 p-1 rounded-full">
                       <svg
@@ -138,8 +164,12 @@ export default function AboutSection() {
 
             {/* Static Button */}
             <div>
-              <MagneticButton className="mt-8 bg-theme text-white hover:bg-theme/90 font-display">
-                Become a Member
+              <MagneticButton
+                className="mt-8 bg-theme text-white hover:bg-theme/90 font-display"
+                onMouseEnter={onCtaEnter}
+                onMouseLeave={onCtaLeave}
+              >
+                {ctaLabel}
               </MagneticButton>
             </div>
           </div>
@@ -270,111 +300,35 @@ export default function AboutSection() {
 
             {/* Floating stats cards - Static */}
             <>
-              {/* Top-left card - Community Fact */}
-              <div className="absolute left-10 top-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
-                <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-theme"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
+              {stats.map((stat, index) => (
+                <div
+                  key={`${stat.label}-${index}`}
+                  className={`${STAT_POSITIONS[index]} bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4`}
+                >
+                  <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-theme"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">{stat.label}</p>
+                    <p className="text-xl font-bold text-theme font-display">
+                      {stat.value}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-500">Community</p>
-                  <p className="text-xl font-bold text-theme font-display">
-                    Diverse minds
-                  </p>
-                </div>
-              </div>
-
-              {/* Upper-middle right card - Events */}
-              <div className="absolute right-24 top-32 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
-                <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-theme"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Events</p>
-                  <p className="text-xl font-bold text-theme font-display">
-                    Monthly events
-                  </p>
-                </div>
-              </div>
-
-              {/* Bottom-left card */}
-              <div className="absolute -left-10 bottom-20 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
-                <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-theme"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Locations</p>
-                  <p className="text-xl font-bold text-theme font-display">
-                    Prime Areas
-                  </p>
-                </div>
-              </div>
-
-              {/* Bottom-right card */}
-              <div className="absolute right-20 bottom-10 bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4">
-                <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-theme"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Brand Partners</p>
-                  <p className="text-xl font-bold text-theme font-display">
-                    Leading brands
-                  </p>
-                </div>
-              </div>
-
-
+              ))}
             </>
           </div>
         </div>

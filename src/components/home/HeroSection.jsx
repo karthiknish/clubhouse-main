@@ -6,8 +6,13 @@ import AnimatedText from "@/components/AnimatedText";
 // import ScrollIndicator from "@/components/ScrollIndicator";
 import MagneticButton from "@/components/MagneticButton";
 
-export default function HeroSection() {
+export default function HeroSection({ content, onButtonEnter, onButtonLeave }) {
   const videoRef = useRef(null);
+  const {
+    headline = "Connect. Innovate. Thrive.",
+    subheadline = "Your Gateway to Exclusive World-Class Opportunities",
+    primaryCtaLabel = "Become a Member",
+  } = content ?? {};
 
   return (
     <div className="relative w-full h-full overflow-hidden">
@@ -52,7 +57,7 @@ export default function HeroSection() {
       >
         <div className="max-w-5xl mx-auto text-center">
           <AnimatedText
-            text="Connect. Innovate. Thrive."
+            text={headline}
             className="text-6xl md:text-8xl font-bold mb-6 tracking-tight font-display"
             type="words"
             delay={0.5}
@@ -65,7 +70,7 @@ export default function HeroSection() {
             className="max-w-2xl mx-auto"
           >
             <p className="text-xl md:text-2xl text-white/80 mb-10 font-display font-light">
-              Your Gateway to Exclusive World-Class Opportunities
+              {subheadline}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -75,8 +80,10 @@ export default function HeroSection() {
                 }}
                 size="lg"
                 className="bg-white text-theme hover:bg-white/90 text-lg px-8 py-6 font-display"
+                onMouseEnter={onButtonEnter}
+                onMouseLeave={onButtonLeave}
               >
-                Become a Member
+                {primaryCtaLabel}
               </MagneticButton>
             </div>
           </motion.div>

@@ -6,14 +6,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [mounted, setMounted] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(() => !isHomePage);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) {
+      return;
+    }
+
+    if (!isHomePage) {
+      setIsScrolled(true);
+      return;
+    }
 
     const handleScroll = () => {
       if (typeof window !== "undefined" && window.scrollY > 50) {
@@ -24,12 +38,13 @@ export default function Navbar() {
     };
 
     if (typeof window !== "undefined") {
+      handleScroll();
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-  }, []);
+  }, [mounted, isHomePage]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -38,7 +53,13 @@ export default function Navbar() {
   // Return a simplified navbar initially to prevent hydration errors
   if (!mounted) {
     return (
-      <header className="fixed top-0 left-0 w-full z-50 py-5 bg-transparent">
+      <header
+        className={`fixed top-0 left-0 z-50 w-full ${
+          isHomePage
+            ? "bg-transparent py-5 text-white"
+            : "bg-white py-3 text-blue-950 shadow-md"
+        }`}
+      >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <Link href="/" className="font-bold text-2xl">
@@ -77,38 +98,29 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <NavLink href="#about" label="About" isScrolled={isScrolled} />
+            <NavLink href="/" label="Home" isScrolled={isScrolled} />
             <NavLink
-              href="#membership"
-              label="Membership"
+              href="/club-hospitality"
+              label="Club Hospitality"
               isScrolled={isScrolled}
             />
             <NavLink
-              href="#locations"
-              label="Locations"
+              href="/luxury-travel"
+              label="Luxury Travel"
               isScrolled={isScrolled}
             />
-           
-            <NavLink href="#app" label="App" isScrolled={isScrolled} />
-            <NavLink
-              href="#testimonials"
-              label="Testimonials"
-              isScrolled={isScrolled}
-            />
-            <NavLink href="#faq" label="FAQ" isScrolled={isScrolled} />
-
+            <NavLink href="/contact" label="Contact" isScrolled={isScrolled} />
             <Button
-              onClick={() => {
-                window.location.href = "/contact";
-              }}
-              variant={isScrolled ? "default" : "outline"}
-              className={
-                isScrolled
-                  ? "bg-green-950 text-white hover:bg-green-950 hover:text-white"
-                  : "border-white text-white hover:bg-white hover:text-green-950"
-              }
+              asChild
+              className="rounded-full bg-green-950 text-white hover:bg-green-900"
             >
-              Contact Us
+              <Link
+                href="https://member.theclubhouse.co.uk/Identity/Account/Login?ReturnUrl=%2F"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Member Sign In
+              </Link>
             </Button>
           </nav>
 
@@ -133,25 +145,35 @@ export default function Navbar() {
             className="md:hidden bg-white text-blue-950"
           >
             <nav className="container mx-auto px-4 py-5 flex flex-col space-y-4">
-              <MobileNavLink href="#about" label="About" onClick={toggleMenu} />
+              <MobileNavLink href="/" label="Home" onClick={toggleMenu} />
               <MobileNavLink
-                href="#membership"
-                label="Membership"
+                href="/club-hospitality"
+                label="Club Hospitality"
                 onClick={toggleMenu}
               />
               <MobileNavLink
-                href="#locations"
-                label="Locations"
+                href="/luxury-travel"
+                label="Luxury Travel"
                 onClick={toggleMenu}
               />
               <MobileNavLink
-                href="#testimonials"
-                label="Testimonials"
+                href="/contact"
+                label="Contact"
                 onClick={toggleMenu}
               />
-              <MobileNavLink href="#card" label="Card" onClick={toggleMenu} />
-              <MobileNavLink href="#app" label="App" onClick={toggleMenu} />
-              <Button className="w-full mt-4">Contact Us</Button>
+              <Button
+                onClick={() => {
+                  toggleMenu();
+                  window.open(
+                    "https://member.theclubhouse.co.uk/Identity/Account/Login?ReturnUrl=%2F",
+                    "_blank",
+                    "noopener,noreferrer"
+                  );
+                }}
+                className="mt-4 w-full rounded-full bg-green-950 text-white hover:bg-green-900"
+              >
+                Member Sign In
+              </Button>
             </nav>
           </motion.div>
         )}
@@ -161,56 +183,36 @@ export default function Navbar() {
 }
 
 function NavLink({ href, label, isScrolled }) {
-  const handleClick = (e) => {
-    e.preventDefault();
-    const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80, // Offset for the navbar height
-        behavior: "smooth",
-      });
-    }
-  };
+  const isExternal = href.startsWith("http");
+
+  const sharedClasses = `relative font-medium hover:text-green-950 transition-colors ${
+    isScrolled ? "text-blue-950" : "text-white"
+  }`;
 
   return (
-    <a
+    <Link
       href={href}
-      onClick={handleClick}
-      className={`relative font-medium hover:text-green-950 transition-colors ${
-        isScrolled ? "text-blue-950" : "text-white"
-      }`}
+      className={sharedClasses}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
     >
       {label}
-    </a>
+    </Link>
   );
 }
 
-function MobileNavLink({ href, label, onClick }) {
-  const handleClick = (e) => {
-    e.preventDefault();
-    onClick(); // Close mobile menu
-
-    // Scroll to section after a small delay to allow menu to close
-    setTimeout(() => {
-      const targetId = href.substring(1);
-      const element = document.getElementById(targetId);
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop - 80, // Offset for the navbar height
-          behavior: "smooth",
-        });
-      }
-    }, 300);
-  };
+function MobileNavLink({ href, label, onClick, openInNewTab = false }) {
+  const isExternal = href.startsWith("http");
 
   return (
-    <a
+    <Link
       href={href}
       className="block py-2 text-lg font-medium hover:text-green-950 transition-colors"
-      onClick={handleClick}
+      onClick={onClick}
+      target={isExternal || openInNewTab ? "_blank" : undefined}
+      rel={isExternal || openInNewTab ? "noopener noreferrer" : undefined}
     >
       {label}
-    </a>
+    </Link>
   );
 }
