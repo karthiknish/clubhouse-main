@@ -43,28 +43,6 @@ const DEFAULT_ASSURANCE_ITEM = {
 };
 
 const DEFAULT_IMAGE = {
-  src: "",
-  alt: "",
-};
-
-const DEFAULT_HOME_STAT = {
-  label: "",
-  value: "",
-};
-
-const PAGE_LABELS = {
-  home: "Home Page",
-  clubHospitality: "Club Hospitality",
-  luxuryTravel: "Luxury Travel",
-};
-
-const formatPageLabel = (key) =>
-  PAGE_LABELS[key] || key.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase());
-
-const AdminPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState(null);
   const [selectedPage, setSelectedPage] = useState("");
@@ -427,7 +405,6 @@ function ClubHospitalityEditor({ data, onChange }) {
   const tailored = data.tailored ?? {};
   const experiences = data.experiences ?? [];
   const benefits = data.benefits ?? {};
-  const finalCta = data.finalCta ?? {};
 
   const updateHero = (partial) => {
     onChange({
@@ -470,15 +447,6 @@ function ClubHospitalityEditor({ data, onChange }) {
     });
   };
 
-  const updateFinalCta = (partial) => {
-    onChange({
-      ...data,
-      finalCta: {
-        ...finalCta,
-        ...partial,
-      },
-    });
-  };
 
   return (
     <div className="space-y-10">
@@ -667,28 +635,6 @@ function ClubHospitalityEditor({ data, onChange }) {
             label="Call-to-action label"
             value={benefits.ctaLabel}
             onChange={(value) => updateBenefits({ ctaLabel: value })}
-          />
-        </div>
-      </section>
-
-      <section>
-        <SectionTitle title="Final call-to-action" description="Closing message displayed before the form." />
-        <div className="grid gap-4">
-          <TextField
-            label="Heading"
-            value={finalCta.heading}
-            onChange={(value) => updateFinalCta({ heading: value })}
-          />
-          <TextAreaField
-            label="Body copy"
-            rows={4}
-            value={finalCta.body}
-            onChange={(value) => updateFinalCta({ body: value })}
-          />
-          <TextField
-            label="Button label"
-            value={finalCta.ctaLabel}
-            onChange={(value) => updateFinalCta({ ctaLabel: value })}
           />
         </div>
       </section>

@@ -34,7 +34,9 @@ export default function RootLayout({ children }) {
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
       </head>
+      {/* Prevent hydration warnings when browser extensions mutate body attributes */}
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${zillaSlab.variable} antialiased`}
       >
         <OptimizedMotion>{children}</OptimizedMotion>

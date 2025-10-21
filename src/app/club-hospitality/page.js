@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 const ClubHospitalityPage = async () => {
   const {
-    clubHospitality: { hero, tailored, experiences, benefits, finalCta },
+    clubHospitality: { hero, tailored, experiences, benefits },
   } = await getPageContent();
 
   return (
@@ -65,7 +65,9 @@ const ClubHospitalityPage = async () => {
             {tailored.paragraphs.map((paragraph, index) => (
               <p
                 key={paragraph}
-                className={`text-lg leading-relaxed text-[#55594F] ${index === 0 ? "mt-6" : "mt-4"}`}
+                className={`text-lg leading-relaxed text-[#55594F] ${
+                  index === 0 ? "mt-6" : "mt-4"
+                }`}
               >
                 {paragraph}
               </p>
@@ -116,7 +118,9 @@ const ClubHospitalityPage = async () => {
                   <div className="text-sm uppercase tracking-[0.3em] text-[#d8cdb7]">
                     Step {index + 1}
                   </div>
-                  <h3 className="mt-4 text-2xl font-semibold">{benefit.title}</h3>
+                  <h3 className="mt-4 text-2xl font-semibold">
+                    {benefit.title}
+                  </h3>
                   <p className="mt-4 text-base leading-relaxed text-[#e8e6df]">
                     {benefit.detail}
                   </p>
@@ -129,25 +133,6 @@ const ClubHospitalityPage = async () => {
                 className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-base font-semibold text-[#1f2620] transition hover:bg-[#f5f5f5]"
               >
                 {benefits.ctaLabel}
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-gradient-to-r from-[#393F37] to-[#4a5246] py-20 text-white">
-          <div className="mx-auto max-w-4xl px-4 text-center">
-            <h2 className="text-3xl font-semibold sm:text-4xl">
-              {finalCta.heading}
-            </h2>
-            <p className="mt-4 text-lg text-[#d1d5d0]">
-              {finalCta.body}
-            </p>
-            <div className="mt-8 flex justify-center">
-              <Link
-                href="#join-form"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-base font-semibold text-[#393F37] transition hover:bg-[#f5f5f5]"
-              >
-                {finalCta.ctaLabel}
               </Link>
             </div>
           </div>
