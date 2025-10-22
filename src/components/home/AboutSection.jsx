@@ -39,10 +39,10 @@ const DEFAULT_STATS = [
 ];
 
 const STAT_POSITIONS = [
-  "absolute left-10 top-10",
-  "absolute right-24 top-32",
-  "absolute -left-10 bottom-20",
-  "absolute right-20 bottom-10",
+  "lg:absolute lg:left-6 lg:top-6",
+  "lg:absolute lg:right-20 lg:top-24",
+  "lg:absolute lg:-left-6 lg:bottom-24",
+  "lg:absolute lg:right-16 lg:bottom-8",
 ];
 
 export default function AboutSection({ content, onCtaEnter, onCtaLeave }) {
@@ -298,14 +298,14 @@ export default function AboutSection({ content, onCtaEnter, onCtaLeave }) {
               </div>
             </div>
 
-            {/* Floating stats cards - Static */}
-            <>
+            {/* Floating stats cards with responsive layout */}
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-0 lg:grid-cols-1 lg:gap-0">
               {stats.map((stat, index) => (
                 <div
                   key={`${stat.label}-${index}`}
-                  className={`${STAT_POSITIONS[index]} bg-white rounded-xl shadow-xl p-4 z-30 flex items-center gap-4`}
+                  className={`${STAT_POSITIONS[index]} relative z-30 flex items-center gap-4 rounded-xl bg-white p-4 shadow-xl`}
                 >
-                  <div className="w-12 h-12 bg-theme/10 rounded-full flex items-center justify-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-theme/10">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6 text-theme"
@@ -323,13 +323,13 @@ export default function AboutSection({ content, onCtaEnter, onCtaLeave }) {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">{stat.label}</p>
-                    <p className="text-xl font-bold text-theme font-display">
+                    <p className="font-display text-xl font-bold text-theme">
                       {stat.value}
                     </p>
                   </div>
                 </div>
               ))}
-            </>
+            </div>
           </div>
         </div>
       </div>
