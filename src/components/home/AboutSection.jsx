@@ -9,9 +9,10 @@ import MagneticButton from "@/components/MagneticButton";
 // Removed TiltCard and optimizedTransform imports
 
 const DEFAULT_PARAGRAPHS = [
-  "An exclusive members' club and rewards program designed for the innovative minds shaping our world.",
-  "With a community of visionaries, entrepreneurs, and business executives from across the globe, Clubhouse is more than a membership—it's a gateway to unparalleled opportunities. Here, members enjoy access to premium benefits from leading travel, lifestyle, and business brands, fostering both personal and professional growth.",
-  "Dive into a world where your ambitions are understood, your potential is recognised, and your achievements are celebrated. Welcome to where the future leaders connect, innovate, and thrive.",
+  "Clubhouse is a business networking club designed specifically for the UK SME market.",
+  "Think of us as your business concierge—whether you need advice, services, or connections, we're here to help.",
+  "Members gain access to an exclusive community of professionals eager to share ideas, collaborate, and unlock new opportunities.",
+  "The more you engage with Clubhouse, the more tailored benefits, services, and rewards become available to support your growth.",
 ];
 
 const DEFAULT_FEATURES = [
@@ -51,7 +52,7 @@ export default function AboutSection({ content, onCtaEnter, onCtaLeave }) {
   const [isMounted, setIsMounted] = useState(false);
 
   const sectionTitle = content?.sectionTitle ?? "Welcome to Clubhouse";
-  const heading = content?.heading ?? "An Exclusive Members' Club";
+  const heading = content?.heading ?? "A Business Club for SMEs";
   const paragraphs = content?.paragraphs?.length
     ? content.paragraphs
     : DEFAULT_PARAGRAPHS;

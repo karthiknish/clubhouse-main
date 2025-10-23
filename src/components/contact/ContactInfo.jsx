@@ -68,8 +68,10 @@ export default function ContactInfo() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 h-full">
-      <h2 className="text-2xl font-bold font-display text-theme mb-6">Contact Information</h2>
-      
+      <h2 className="text-2xl font-bold font-display text-theme mb-6">
+        Contact Information
+      </h2>
+
       <div className="space-y-6 mb-8">
         {contactItems.map((item, index) => (
           <motion.a
@@ -91,7 +93,7 @@ export default function ContactInfo() {
           </motion.a>
         ))}
       </div>
-      
+
       <div>
         <h3 className="text-lg font-medium text-gray-900 mb-4">Follow Us</h3>
         <div className="flex gap-4">
@@ -110,21 +112,24 @@ export default function ContactInfo() {
           ))}
         </div>
       </div>
-      
+
       <div className="mt-8 pt-6 border-t border-gray-200">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Business Hours</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">
+          Business Hours
+        </h3>
+        {/* Business hours updated to reflect weekday 9–5 availability */}
         <ul className="space-y-2 text-gray-600">
           <li className="flex justify-between">
-            <span>Monday - Friday</span>
-            <span className="font-medium">7:00 AM - 11:00 PM</span>
+            <span>Monday – Friday</span>
+            <span className="font-medium">9:00 AM – 5:00 PM</span>
           </li>
           <li className="flex justify-between">
             <span>Saturday</span>
-            <span className="font-medium">8:00 AM - 10:00 PM</span>
+            <span className="font-medium">Closed</span>
           </li>
           <li className="flex justify-between">
             <span>Sunday</span>
-            <span className="font-medium">9:00 AM - 8:00 PM</span>
+            <span className="font-medium">Closed</span>
           </li>
         </ul>
       </div>

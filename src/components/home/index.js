@@ -1,7 +1,6 @@
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import MembershipSection from "./MembershipSection";
-import LocationsSection from "./LocationsSection";
 import TestimonialsSection from "./TestimonialsSection";
 import CardSection from "./CardSection";
 import AppSection from "./AppSection";
@@ -13,7 +12,6 @@ export {
   HeroSection,
   AboutSection,
   MembershipSection,
-  LocationsSection,
   CardSection,
   AppSection,
   TestimonialsSection,

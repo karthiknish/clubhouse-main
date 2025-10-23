@@ -6,6 +6,7 @@ import AnimatedText from "@/components/AnimatedText";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import Image from "next/image";
 
+// LocationsSection is temporarily kept for reference; remove when no longer needed.
 export default function LocationsSection() {
   // City data with images and descriptions - using smaller images for better performance
   const cities = [

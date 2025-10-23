@@ -7,7 +7,6 @@ import {
   HeroSection,
   AboutSection,
   MembershipSection,
-  LocationsSection,
   TestimonialsSection,
   AppSection,
   CTASection,
@@ -42,7 +41,10 @@ export default function HomePageClient({ content }) {
     <main className="relative flex min-h-screen flex-col items-center justify-between overflow-hidden">
       <Navbar />
       {mounted ? (
-        <CustomCursor mousePosition={mousePosition} cursorVariant={cursorVariant} />
+        <CustomCursor
+          mousePosition={mousePosition}
+          cursorVariant={cursorVariant}
+        />
       ) : null}
 
       <section id="hero" className="h-screen w-full">
@@ -63,10 +65,6 @@ export default function HomePageClient({ content }) {
 
       <section id="membership" className="w-full">
         <MembershipSection content={membershipContent} />
-      </section>
-
-      <section id="locations" className="w-full">
-        <LocationsSection />
       </section>
 
       <section id="app" className="w-full">

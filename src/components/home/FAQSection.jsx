@@ -18,24 +18,23 @@ const FAQSection = () => {
     {
       question: "What is Clubhouse?",
       answer:
-        "An Exclusive members club and rewards program designed for owners of small to medium businesses ."
+        "Clubhouse is a business club tailored to the UK SME market—your concierge for advice, services, and the connections that help your company grow.",
     },
     {
       question: "How do I become a member?",
       answer:
-        "To become a member, you can apply through our website by filling out the contact form. Our team will review your application and contact you to discuss membership options and arrange a tour of our facilities."
+        "To become a member, you can apply through our website by filling out the contact form. Our team will review your application and contact you to discuss membership options and arrange a tour of our facilities.",
     },
     {
       question: "What are the membership benefits?",
       answer:
-        "Access to exclusive savings, educational resources, marketing support, well-being programs, professional networking opportunities, and private events."
+        "Access to exclusive savings, educational resources, marketing support, well-being programs, professional networking opportunities, and private events.",
     },
     {
       question: "Are there different membership tiers?",
       answer:
-        "We offer three distinct membership tiers, each granting a tailored level of access to the Clubhouse, thoughtfully designed to meet your business needs - contact us to discuss"
+        "We offer three distinct membership tiers, each granting a tailored level of access to the Clubhouse, thoughtfully designed to meet your business needs - contact us to discuss",
     },
-
   ];
 
   // Only initialize client-side state after mounting
